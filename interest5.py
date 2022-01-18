@@ -31,3 +31,5 @@ while retireYears > 0:
 	principal = round(principal, 2)
 	retireYears -= 1
 	print(f'{retireYears} Total: ${principal}')
+	if principal <= 0:
+		print('You\'re out of money!')
