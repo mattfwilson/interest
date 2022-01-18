@@ -8,10 +8,13 @@ growthYears = 15
 contribution = 30000
 output = []
 retireYears = 40
-retireIncome = 40000
+retireIncome = 75000
 
 def calcInterest(principal, interest, numCompounds, contribution):
 	principal += contribution
+	return principal * (1 + (interest / numCompounds)) ** numCompounds
+
+def calcInterestRetired(principal, interest, numCompounds):
 	return principal * (1 + (interest / numCompounds)) ** numCompounds
 
 while yearCounter < growthYears:
@@ -24,12 +27,14 @@ annualTotal = principal / retireYears
 monthlyTotal = annualTotal / 12
 
 print(f'\nAnnual total: ${annualTotal}')
-print(f'Monthly total: ${monthlyTotal}')
+print(f'Monthly total: ${monthlyTotal}\n')
 
 while retireYears > 0:
 	principal = principal - retireIncome
+	principal = calcInterestRetired(principal, interest, numCompounds)
 	principal = round(principal, 2)
 	retireYears -= 1
 	print(f'{retireYears} Total: ${principal}')
 	if principal <= 0:
 		print('You\'re out of money!')
+		break
