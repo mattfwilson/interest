@@ -1,14 +1,15 @@
 # Add function to track expenses out in retirement years and net total decrease with compound interest
+# Add functionality to separate interest gained over a year from total principal + contribution + interest
 
-principal = 635000
-interest = .07
+principal = 0
+interest = .08
 numCompounds = 12
 yearCounter = 0
 growthYears = 15
-contribution = 30000
+contribution = 12000
 output = []
 retireYears = 40
-retireIncome = 75000
+retireIncome = 45000
 
 def calcInterest(principal, interest, numCompounds, contribution):
 	principal += contribution
