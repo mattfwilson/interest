@@ -12,17 +12,19 @@ retireYears = 35
 retireIncome = 40000
 
 def calcInterest(principal, interest, numCompounds, contribution):
+	newTotal = principal
+	principal * (1 + (interest / numCompounds)) ** numCompounds
 	principal += contribution
-	return principal * (1 + (interest / numCompounds)) ** numCompounds
+	return principal
 
 def calcInterestRetired(principal, interest, numCompounds, income):
 	return principal - income * (1 + (interest / numCompounds)) ** numCompounds
 
 while yearCounter < growthYears:
 	yearCounter += 1
-	principal = calcInterest(principal, interest, numCompounds, contribution)
-	principal = round(principal, 2)
-	print(f"Growth Year {yearCounter}: ${principal}")
+	principalInterest = calcInterest(principal, interest, numCompounds, contribution)
+	principalInterest = round(principalInterest[0], 2)
+	print(f"Growth Year {yearCounter}: ${principalInterest}")
 
 annualTotal = principal / retireYears
 monthlyTotal = annualTotal / 12
