@@ -12,31 +12,31 @@ contribution = 12000
 retireYears = 35
 retireIncome = 50000
 
-class testInterest:
-	def __init__(self, interest, principal):
-		self.interest = interest
-		self.principal = principal
+# class testInterest:
+# 	def __init__(self, interest, principal):
+# 		self.interest = interest
+# 		self.principal = principal
 	
-def test():
-	return testInterest()
+# def test():
+# 	return testInterest()
 
 
 def calcInterest(principal, interest, numCompounds, contribution):
 	accrued = 0
-	accrued -= (principal * (1 + (interest / numCompounds)) ** numCompounds) - principal
+	accrued = (principal * (1 + (interest / numCompounds)) ** numCompounds) - principal
 	principal = principal * (1 + (interest / numCompounds)) ** numCompounds
 	principal += contribution
-	print(accrued)
-	return principal
+	return principal, accrued
 
 def calcInterestRetired(principal, interest, numCompounds, income):
 	return principal - income * (1 + (interest / numCompounds)) ** numCompounds
 
 while yearCounter < growthYears:
 	yearCounter += 1
-	principal = calcInterest(principal, interest, numCompounds, contribution)
+	principal, interestDelta = calcInterest(principal, interest, numCompounds, contribution)
 	principal = round(principal, 2)
-	print(f"Growth Year {yearCounter}: ${principal} | Interest: ")
+	interestDelta = round(interestDelta, 2)
+	print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
 
 annualTotal = principal / retireYears
 monthlyTotal = annualTotal / 12
