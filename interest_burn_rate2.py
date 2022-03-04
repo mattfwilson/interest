@@ -1,14 +1,11 @@
 # Add function to track expenses out in retirement years and net total decrease with compound interest
-# Add functionality to separate interest gained over a year from total principal + contribution + interest
-# Test @mattfwilson git account
-# Test 2
 
-principal = 650000
-interest = .065
+principal = 25000
+interest = .32
 numCompounds = 12
 yearCounter = 0
-growthYears = 15
-contribution = 12000
+growthYears = 4
+contribution = 90000
 retireYears = 35
 retireIncome = 50000
 
