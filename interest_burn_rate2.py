@@ -1,11 +1,11 @@
 # Add function to track expenses out in retirement years and net total decrease with compound interest
 
-principal = 25000
-interest = .32
+principal = 100000
+interest = .065
 numCompounds = 12
 yearCounter = 0
-growthYears = 4
-contribution = 90000
+growthYears = 20
+contribution = 15000
 retireYears = 35
 retireIncome = 50000
 
@@ -19,9 +19,8 @@ retireIncome = 50000
 
 
 def calcInterest(principal, interest, numCompounds, contribution):
-	accrued = 0
 	accrued = (principal * (1 + (interest / numCompounds)) ** numCompounds) - principal
-	principal = principal * (1 + (interest / numCompounds)) ** numCompounds
+	principal = principal + accrued
 	principal += contribution
 	return principal, accrued
 
@@ -35,18 +34,18 @@ while yearCounter < growthYears:
 	interestDelta = round(interestDelta, 2)
 	print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
 
-annualTotal = principal / retireYears
-monthlyTotal = annualTotal / 12
+annualTotal = round(principal / retireYears, 2)
+monthlyTotal = round(annualTotal / 12, 2)
 
-print(f'\nAnnual total: ${annualTotal}')
-print(f'Monthly total: ${monthlyTotal}\n')
+print(f'\nAnnual spend total: ${annualTotal}')
+print(f'Monthly spend total: ${monthlyTotal}\n')
 
-while retireYears > 0:
-	principal = principal - retireIncome
-	principal = calcInterestRetired(principal, interest, numCompounds, retireIncome)
-	principal = round(principal, 2)
-	retireYears -= 1
-	print(f'Retired Year {retireYears}: ${principal}')
-	if principal <= 0:
-		print('You\'re out of money!')
-		break
+# while retireYears > 0:
+# 	principal = principal - retireIncome
+# 	principal = calcInterestRetired(principal, interest, numCompounds, retireIncome)
+# 	principal = round(principal, 2)
+# 	retireYears -= 1
+# 	print(f'Retired Year {retireYears}: ${principal}')
+# 	if principal <= 0:
+# 		print('You\'re out of money!')
+# 		break
