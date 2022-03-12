@@ -9,14 +9,13 @@ contribution = 15000
 retireYears = 35
 retireIncome = 50000
 
-# class testInterest:
-# 	def __init__(self, interest, principal):
-# 		self.interest = interest
-# 		self.principal = principal
+class testInterest:
+	def __init__(self, interest, principal):
+		self.interest = interest
+		self.principal = principal
 	
-# def test():
-# 	return testInterest()
-
+def test():
+	return testInterest()
 
 def calcInterest(principal, interest, numCompounds, contribution):
 	accrued = (principal * (1 + (interest / numCompounds)) ** numCompounds) - principal
