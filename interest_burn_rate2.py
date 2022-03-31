@@ -1,12 +1,12 @@
 # Add function to track expenses out in retirement years and net total decrease with compound interest
 
-principal = 100000
-interest = .065
+principal = 650000
+interest = .07
 numCompounds = 12
 yearCounter = 0
-growthYears = 20
-contribution = 15000
-retireYears = 35
+growthYears = 12
+contribution = 30000
+retireYears = 40
 retireIncome = 50000
 
 class testInterest:
