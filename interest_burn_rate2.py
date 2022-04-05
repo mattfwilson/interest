@@ -7,21 +7,23 @@ yearCounter = 0
 growthYears = 10
 contribution = 36000
 retireYears = 40
-retireIncome = 50000
+retireIncome = 30000
 
 class Summary:
-	def __init__(self, principal, interest):
+	def __init__(self, principal, interest, retireYears):
 		self.principal = principal
 		self.interest = interest
+		self.retireYears = retireYears
 	
-	def displayPrincipal(self):
+	def displaySummary(self):
 		dollars = "${:,.2f}".format(self.principal)
-		print(f"Your principal amount is: {dollars}")
-
-	def displayInterest(self):
 		percentage = "{:.2%}".format(self.interest)
-		print(f"Your interest rate is: {percentage}")
-
+		annualTotal = round(self.principal / self.retireYears, 2)
+		monthlyTotal = round(annualTotal / 12, 2)
+		print(f"\nTotal before withdrawing: {dollars}")
+		print(f"Interest rate: {percentage}")
+		print(f"Annual retire spend: ${annualTotal}")
+		print(f"Monthly retire spend: ${monthlyTotal}\n")
 
 def calcInterest(principal, interest, numCompounds, contribution):
 	accrued = (principal * (1 + (interest / numCompounds)) ** numCompounds) - principal
@@ -39,22 +41,15 @@ while yearCounter < growthYears:
 	interestDelta = round(interestDelta, 2)
 	print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
 
-annualTotal = round(principal / retireYears, 2)
-monthlyTotal = round(annualTotal / 12, 2)
+stats = Summary(principal, interest, retireYears)
+stats.displaySummary()
 
-print(f'\nAnnual spend total: ${annualTotal}')
-print(f'Monthly spend total: ${monthlyTotal}\n')
-
-stats = Summary(principal, interest)
-stats.displayPrincipal()
-stats.displayInterest()
-
-# while retireYears > 0:
-# 	principal = principal - retireIncome
-# 	principal = calcInterestRetired(principal, interest, numCompounds, retireIncome)
-# 	principal = round(principal, 2)
-# 	retireYears -= 1
-# 	print(f'Retired Year {retireYears}: ${principal}')
-# 	if principal <= 0:
-# 		print('You\'re out of money!')
-# 		break
+while retireYears > 0:
+	principal = principal - retireIncome
+	principal = calcInterestRetired(principal, interest, numCompounds, retireIncome)
+	principal = round(principal, 2)
+	retireYears -= 1
+	print(f'Retired Year {retireYears}: ${principal}')
+	if principal <= 0:
+		print('You\'re out of money!')
+		break
