@@ -7,6 +7,7 @@ yearCounter = 0
 growthYears = 10
 contribution = 36000
 retireYears = 40
+retirement = 0
 retireIncome = 30000
 
 class Summary:
@@ -44,12 +45,12 @@ while yearCounter < growthYears:
 stats = Summary(principal, interest, retireYears)
 stats.displaySummary()
 
-while retireYears > 0:
+while retirement < retireYears:
 	principal = principal - retireIncome
 	principal = calcInterestRetired(principal, interest, numCompounds, retireIncome)
 	principal = round(principal, 2)
 	retireYears -= 1
 	print(f'Retired Year {retireYears}: ${principal}')
 	if principal <= 0:
-		print('You\'re out of money!')
+		print(f'You\'re out of money! Go get that bread again...')
 		break
