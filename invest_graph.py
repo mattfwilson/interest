@@ -12,7 +12,7 @@ contribution = 36000
 testInterest = []
 left = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # x-coordinates of left sides of bars
 height = [10, 24, 36, 40, 5] # heights of bars
-tick_label = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'] # labels for bars
+tick_label = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # labels for bars
 
 # calculate compound interest
 def calcInterest(principal, interest, numCompounds, contribution):
