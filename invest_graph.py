@@ -10,10 +10,9 @@ yearCounter = 0
 growthYears = 10
 contribution = 36000
 testInterest = []
-
-left = [1, 2, 3, 4, 5] # x-coordinates of left sides of bars
+left = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # x-coordinates of left sides of bars
 height = [10, 24, 36, 40, 5] # heights of bars
-year_label = [] # labels for bars
+tick_label = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'] # labels for bars
 
 # calculate compound interest
 def calcInterest(principal, interest, numCompounds, contribution):
@@ -29,13 +28,13 @@ while yearCounter < growthYears:
     principal = round(principal, 2)
     interestDelta = round(interestDelta, 2)
     testInterest.append(principal)
-    year_label.append(interestDelta)
+    # tick_label.append(interestDelta)
     print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
     print(f'{testInterest}')
 
 # plot title
 plt.title(f'Compound interest over {growthYears} years at {percentage}')
-plt.bar(left, height, year_label = year_label, width = 0.8, color = ['orange', 'green']) # plotting a bar chart
+plt.bar(left, testInterest, tick_label = tick_label, width = 0.8, color = ['green']) # plotting a bar chart
 plt.ylabel('Value in dollars') # naming the y-axis
 plt.xlabel('Years of compounding')# naming the x-axis
 plt.show() # function to show the plot chart
