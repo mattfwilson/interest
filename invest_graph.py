@@ -33,8 +33,12 @@ while yearCounter < growthYears:
     print(f'{testInterest}')
 
 # plot title
-plt.title(f'Compound interest over {growthYears} years at {percentage}')
-plt.bar(left, testInterest, tick_label = tick_label, width = 0.8, color = ['green']) # plotting a bar chart
-plt.ylabel('Value in dollars') # naming the y-axis
-plt.xlabel('Years of compounding')# naming the x-axis
-plt.show() # function to show the plot chart
+# plt.title(f'Compound interest over {growthYears} years at {percentage}')
+# plt.bar(left, testInterest, tick_label = tick_label, width = 0.8, color = ['green']) # plotting a bar chart
+# plt.ylabel('Value in dollars') # naming the y-axis
+# plt.xlabel('Years of compounding')# naming the x-axis
+# plt.show() # function to show the plot chart
+
+for i in range(1, len(testInterest)):
+    test = testInterest[i] - testInterest[i -1]
+    print(test)
