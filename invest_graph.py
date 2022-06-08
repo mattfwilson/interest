@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib import pylab
 
 # variables to play with
-principal = 600000
+principal = 250000
 interest = .065
 percentage = "{:.2%}".format(interest)
 numCompounds = 12
@@ -31,7 +31,7 @@ while yearCounter < growthYears:
     testInterest.append(principal)
     # tick_label.append(interestDelta)
     print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
-    print(f'{testInterest}')
+    print(f'{testInterest[-1:]}')
 
 # plot title
 # plt.title(f'Compound interest over {growthYears} years at {percentage}')
