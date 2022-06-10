@@ -35,8 +35,8 @@ while yearCounter < growthYears:
 
 # plot title
 plt.title(f'Compound interest over {growthYears} years at {percentage}')
-plt.bar(left, testInterest, tick_label = tick_label, width = .5, color = ['green']) # plotting a bar chart
-plt.ylabel('Value in dollars') # naming the y-axis
+plt.bar(left, testInterest, tick_label = tick_label, width = .75, color = ['green']) # plotting a bar chart
+plt.ylabel('Value in $') # naming the y-axis
 plt.xlabel('Years of compounding')# naming the x-axis
 plt.show() # function to show the plot chart
 
