@@ -43,6 +43,7 @@ plt.show() # function to show the plot chart
 
 for i in range(1, len(testInterest)):
     delta = testInterest[i] - testInterest[i -1]
+    dollars = '${:,.2f}'.format(testInterest)
     interestDelta.append(delta)
-    print(interestDelta)
+    print(dollars)
 
