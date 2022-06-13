@@ -31,7 +31,6 @@ while yearCounter < growthYears:
     testInterest.append(principal)
     # tick_label.append(interestDelta)
     print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
-    print(f'{testInterest[-1:]}')
 
 # plot title
 plt.title(f'Compound interest over {growthYears} years at {percentage}')
@@ -42,8 +41,8 @@ plt.show() # function to show the plot chart
 
 
 for i in range(1, len(testInterest)):
-    delta = testInterest[i] - testInterest[i -1]
-    dollars = '${:,.2f}'.format(delta)
+    delta = int(testInterest[i] - testInterest[i -1])
     interestDelta.append(delta)
-    print(dollars)
+    dollars = '${:,.2f}'.format(delta)
+
 
