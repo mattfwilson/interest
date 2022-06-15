@@ -29,20 +29,19 @@ while yearCounter < growthYears:
     principal = round(principal, 2)
     interestDelta = round(interestDelta, 2)
     testInterest.append(principal)
-    # tick_label.append(interestDelta)
     print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
 
-# plot title
-plt.title(f'Compound interest over {growthYears} years at {percentage}')
-plt.bar(left, testInterest, tick_label = tick_label, width = .75, color = ['green']) # plotting a bar chart
-plt.ylabel('Value in $') # naming the y-axis
-plt.xlabel('Years of compounding')# naming the x-axis
-plt.show() # function to show the plot chart
-
-
 for i in range(1, len(testInterest)):
-    delta = int(testInterest[i] - testInterest[i -1])
-    interestDelta.append(delta)
+    delta = testInterest[i] - testInterest[i - 1]
     dollars = '${:,.2f}'.format(delta)
+    print(f'Delta is {dollars}')
+    print(testInterest)
+
+# # plot title
+# plt.title(f'Compound interest over {growthYears} years at {percentage}')
+# plt.bar(left, testInterest, tick_label = tick_label, width = .75, color = ['green']) # plotting a bar chart
+# plt.ylabel('Value in $') # naming the y-axis
+# plt.xlabel('Years of compounding')# naming the x-axis
+# plt.show() # function to show the plot chart
 
 
