@@ -3,7 +3,7 @@ from matplotlib import pylab
 
 # variables to play with
 principal = 500000
-interest = .065
+interest = .085
 percentage = "{:.2%}".format(interest)
 numCompounds = 12
 yearCounter = 0
@@ -37,11 +37,9 @@ for i in range(1, len(testInterest)):
     print(f'Delta is {dollars}')
     print(testInterest)
 
-# # plot title
-# plt.title(f'Compound interest over {growthYears} years at {percentage}')
-# plt.bar(left, testInterest, tick_label = tick_label, width = .75, color = ['green']) # plotting a bar chart
-# plt.ylabel('Value in $') # naming the y-axis
-# plt.xlabel('Years of compounding')# naming the x-axis
-# plt.show() # function to show the plot chart
-
-
+# plot title
+plt.title(f'Compound interest over {growthYears} years at {percentage}')
+plt.bar(left, testInterest, tick_label = tick_label, width = .75, color = ['green']) # plotting a bar chart
+plt.ylabel('Value in $') # naming the y-axis
+plt.xlabel('Years of compounding')# naming the x-axis
+plt.show() # function to show the plot chart
