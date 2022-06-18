@@ -9,6 +9,7 @@ numCompounds = 12
 yearCounter = 0
 growthYears = 10
 contribution = 36000
+testDollars = []
 testInterest = []
 interestDelta = []
 left = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # x-coordinates of left sides of bars
@@ -29,17 +30,20 @@ while yearCounter < growthYears:
     principal = round(principal, 2)
     interestDelta = round(interestDelta, 2)
     testInterest.append(principal)
-    print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
+    # =print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
 
+# find delta of YOY compound interest gains
 for i in range(1, len(testInterest)):
     delta = testInterest[i] - testInterest[i - 1]
     dollars = '${:,.2f}'.format(delta)
-    print(f'Delta is {dollars}')
-    print(testInterest)
+    testDollars.append(dollars)
+print(f'Delta is {dollars}')
+print(testInterest)
+print(testDollars)
 
-# plot title
-plt.title(f'Compound interest over {growthYears} years at {percentage}')
-plt.bar(left, testInterest, tick_label = tick_label, width = .75, color = ['green']) # plotting a bar chart
-plt.ylabel('Value in $') # naming the y-axis
-plt.xlabel('Years of compounding')# naming the x-axis
-plt.show() # function to show the plot chart
+# show chart
+# plt.title(f'Compound interest over {growthYears} years at {percentage}')
+# plt.bar(left, testInterest, tick_label = tick_label, width = .75, color = ['green']) # plotting a bar chart
+# plt.ylabel('Total value (by $Millions)') # naming the y-axis
+# plt.xlabel('Years of compounding')# naming the x-axis
+# plt.show() # function to show the plot chart
