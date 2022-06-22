@@ -24,18 +24,22 @@ def calcInterest(principal, interest, numCompounds, contribution):
 	return principal, accrued
 
 # show YOY summary
-while yearCounter < growthYears:
-    yearCounter += 1
-    principal, interestDelta = calcInterest(principal, interest, numCompounds, contribution)
-    principal = round(principal, 2)
-    interestDelta = round(interestDelta, 2)
-    testInterest.append(principal)
+# while yearCounter < growthYears:
+#     yearCounter += 1
+#     principal, interestDelta = calcInterest(principal, interest, numCompounds, contribution)
+#     principal = round(principal, 2)
+#     interestDelta = round(interestDelta, 2)
+#     testInterest.append(principal)
 
 principal = input('What is your base principal amount? ')
-print(f'Okay, principal of ${principal}')
-interest = input('What is your assumed avg interest rate? ')
+print(f'Okay, your starting principal is ${principal}.')
+interest = input(f'What is your assumed avg % interest rate? ')
+decimal_interest = float(interest) / 100
+print(f'Nice, {interest}%.')
 contribution = input('What is your total annual contribution? ')
+print(f'Excellent, ${contribution} will help your investment grow.')
 growthYears = input('How many years before you retire? ')
+print(f'{growthYears}, you\'ll be there before you know it!')
 
 # show chart
 plt.title(f'Compound interest over {growthYears} years at {percentage}')
