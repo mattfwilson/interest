@@ -32,6 +32,11 @@ while yearCounter < growthYears:
     testInterest.append(principal)
     # =print(f'Year {yearCounter} Total: ${principal} | Interest: ${interestDelta}')
 
+principal = input('What is your base principal amount? ')
+interest = input('What is your assumed avg interest rate? ')
+contribution = input('What is your total annual contribution? ')
+growthYears = input('How many years before you retire? ')
+
 # # find delta of YOY compound interest gains
 # for i in range(1, len(testInterest)):
 #     delta = testInterest[i] - testInterest[i - 1]
