@@ -7,8 +7,9 @@ interest = .08
 percentage = "{:.2%}".format(interest)
 numCompounds = 1
 yearCounter = 0
-growthYears = 8
+growthYears = 15
 contribution = 40000
+contribution_inc = .02
 testInterest = []
 left_label = []
 bottom_label = []
@@ -30,7 +31,7 @@ while yearCounter < growthYears:
     bottom_label.append(yearCounter)
 
 # chart YOY totals
-plt.title(f'Compound interest over {growthYears} years at {percentage}')
+plt.title(f'Compound interest over {growthYears} years at {percentage} = ${principal}')
 plt.bar(left_label, testInterest, tick_label = bottom_label, width = .75, color = ['green'])
 plt.ylabel('Total value (by $Millions)')
 plt.xlabel('Years of compounding')
