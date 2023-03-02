@@ -2,13 +2,13 @@ import matplotlib
 matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
 
-principal = 675000
+principal = 50000
 int_rate = .07
 percentage = "{:.2%}".format(int_rate)
 num_comp = 12
-growthYears = 10
-yearCounter = 0
-annual_contribution = 10000
+comp_years = 25
+counter = 0
+contribution = 10000
 left_label = []
 bottom_label = []
 accrued = []
@@ -22,16 +22,18 @@ def calc_compound(P, r, n, t):
     return amount
 
 # count increment for graph tick labels
-while yearCounter < growthYears:
-    yearCounter += 1
-    left_label.append(yearCounter)
-    bottom_label.append(yearCounter)
+while counter < comp_years:
+    counter += 1
+    left_label.append(counter)
+    bottom_label.append(counter)
 
 # instantiate calc_compound
-compounded = calc_compound(principal, int_rate, num_comp, growthYears)
+compounded = round(calc_compound(principal, int_rate, num_comp, comp_years), 2)
+dollars = '{:,}'.format(compounded)
 
 # graph data with matplot
-plt.title(f'Compound interest over {growthYears} years at {percentage} = ${round(compounded, 2)}')
+fig, ax = plt.subplots(figsize=(12, 9))
+plt.title(f'Compound interest over {comp_years} years at {percentage} = ${dollars}', fontsize='20', fontweight='bold')
 plt.bar(left_label, accrued, tick_label=bottom_label, width=.5, color=['green'])
 plt.ylabel('Total value (by $Millions)')
 plt.xlabel('Years of compounding')
