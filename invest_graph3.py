@@ -4,22 +4,28 @@ from matplotlib import pyplot as plt
 
 principal = 50000
 int_rate = .07
-percentage = "{:.2%}".format(int_rate)
 num_comp = 12
 comp_years = 25
 counter = 0
 contribution = 10000
 left_label = []
 bottom_label = []
-accrued = []
+total = []
+int_accrued = []
 
-# compounding func appending each year to accrued list
+# compounding func appending each year to total list
 def calc_compound(P, r, n, t):
     for year in range(t):
         amount = P * (pow((1 + r / n), n * (year + 1)))
-        accrued.append(amount)
+        total.append(amount)
         print(f'Year {year + 1} - ${round(amount, 2)}')
     return amount
+
+# input
+principal = int(input('How much do you currently have saved? '))
+comp_years = int(input('How many years until retirement? '))
+int_rate = float(input('What is the current interest rate? '))
+percentage = "{:.2%}".format(int_rate)
 
 # count increment for graph tick labels
 while counter < comp_years:
@@ -34,7 +40,7 @@ dollars = '{:,}'.format(compounded)
 # graph data with matplot
 fig, ax = plt.subplots(figsize=(12, 9))
 plt.title(f'Compound interest over {comp_years} years at {percentage} = ${dollars}', fontsize='20', fontweight='bold')
-plt.bar(left_label, accrued, tick_label=bottom_label, width=.5, color=['green'])
+plt.bar(left_label, total, tick_label=bottom_label, width=.5, color=['green'])
 plt.ylabel('Total value (by $Millions)')
 plt.xlabel('Years of compounding')
 plt.show()
