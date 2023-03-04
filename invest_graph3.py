@@ -1,11 +1,12 @@
 import matplotlib
 matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
+from matplotlib import pylab
 
-principal = 50000
+principal = 700000
 int_rate = .07
 num_comp = 12
-comp_years = 25
+comp_years = 15
 counter = 0
 contribution = 10000
 left_label = []
@@ -22,9 +23,9 @@ def calc_compound(P, r, n, t):
     return amount
 
 # input
-principal = int(input('How much do you currently have saved? '))
-comp_years = int(input('How many years until retirement? '))
-int_rate = float(input('What is the current interest rate? '))
+# principal = int(input('How much do you currently have saved? '))
+# comp_years = int(input('How many years until retirement? '))
+# int_rate = float(input('What is the current interest rate? '))
 percentage = "{:.2%}".format(int_rate)
 
 # count increment for graph tick labels
@@ -39,8 +40,11 @@ dollars = '{:,}'.format(compounded)
 
 # graph data with matplot
 fig, ax = plt.subplots(figsize=(12, 9))
-plt.title(f'Compound interest over {comp_years} years at {percentage} = ${dollars}', fontsize='20', fontweight='bold')
+fig.suptitle(f'Compound principal + accrued interest over {comp_years} years', fontsize='20', fontweight='bold')
+plt.title(f'Interest Rate: {percentage}, Total: ${dollars}', fontsize='12', fontweight='regular')
 plt.bar(left_label, total, tick_label=bottom_label, width=.5, color=['green'])
-plt.ylabel('Total value (by $Millions)')
-plt.xlabel('Years of compounding')
+plt.ylabel('Total value', fontweight='bold')
+ax.xaxis.set_label_coords(.5, -.07)
+plt.xlabel('Years of compounding', fontweight='bold')
+ax.yaxis.set_label_coords(-.1, .5)
 plt.show()
