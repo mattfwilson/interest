@@ -4,9 +4,9 @@ from matplotlib import pyplot as plt
 from matplotlib import pylab
 
 principal = 700000
-int_rate = .07
+int_rate = .09
 num_comp = 12
-comp_years = 15
+comp_years = 13
 counter = 0
 contribution = 10000
 left_label = []
@@ -26,7 +26,7 @@ def calc_compound(P, r, n, t):
 # principal = int(input('How much do you currently have saved? '))
 # comp_years = int(input('How many years until retirement? '))
 # int_rate = float(input('What is the current interest rate? '))
-percentage = "{:.2%}".format(int_rate)
+percentage = '{:.2%}'.format(int_rate)
 
 # count increment for graph tick labels
 while counter < comp_years:

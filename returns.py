@@ -29,11 +29,15 @@ returns = {
     2022: -.1801,
 }
 
+lst_returns = list(returns)
+
 def avg_returns(lst):
     total = 0
     for key, value in lst.items(): 
+        print(key, value)
         total += lst[key]
-    return round(total / len(lst), 2)
+    return round(total / len(lst), 4)
 
 res = avg_returns(returns)
-print(res)
+res_perc = '{:.2%}'.format(res)
+print(f'Average gain from {lst_returns[0]} to {lst_returns[-1]} is {res_perc}.')
