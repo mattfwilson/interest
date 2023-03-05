@@ -1,24 +1,30 @@
 import matplotlib
 matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
-from matplotlib import pylab
 from returns import *
 
 principal = 700000
 int_rate = .0752
 num_comp = 12
-comp_years = 13
+comp_years = 15
 counter = 0
-contribution = int(10000)
+contribution = 40000
 left_label = []
 bottom_label = []
 total = []
 int_accrued = []
 
 # compounding func appending each year to total list
-def calc_compound(P, r, n, t, c):
-    for year in range(t):
-        amount = (P + c) * (pow((1 + r / n), n * (year + 1)))
+def calc_compound(principal, rate, num_comp, time, contribution):
+    for year in range(time):
+        amount = (principal + contribution) * (pow((1 + rate / num_comp), num_comp * (year + 1)))
+        total.append(amount)
+        print(f'Year {year + 1} - ${round(amount, 2)}')
+    return amount
+
+def calc_interest(principal, rate, time):
+    for year in range(time):
+        amount = principal * pow(1 + rate), time
         total.append(amount)
         print(f'Year {year + 1} - ${round(amount, 2)}')
     return amount
