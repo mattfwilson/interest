@@ -5,20 +5,20 @@ from matplotlib import pylab
 from returns import *
 
 principal = 700000
-int_rate = hist_interest
+int_rate = .0752
 num_comp = 12
 comp_years = 13
 counter = 0
-contribution = 10000
+contribution = int(10000)
 left_label = []
 bottom_label = []
 total = []
 int_accrued = []
 
 # compounding func appending each year to total list
-def calc_compound(P, r, n, t):
+def calc_compound(P, r, n, t, c):
     for year in range(t):
-        amount = P * (pow((1 + r / n), n * (year + 1)))
+        amount = (P + c) * (pow((1 + r / n), n * (year + 1)))
         total.append(amount)
         print(f'Year {year + 1} - ${round(amount, 2)}')
     return amount
@@ -36,7 +36,7 @@ while counter < comp_years:
     bottom_label.append(counter)
 
 # instantiate calc_compound
-compounded = round(calc_compound(principal, int_rate, num_comp, comp_years), 2)
+compounded = round(calc_compound(principal, int_rate, num_comp, comp_years, contribution), 2)
 dollars = '{:,}'.format(compounded)
 
 # graph data with matplot
