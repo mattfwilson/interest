@@ -38,6 +38,6 @@ def avg_returns(lst):
         total += lst[key]
     return round(total / len(lst), 4)
 
-res = avg_returns(returns)
-res_perc = '{:.2%}'.format(res)
-print(f'Average gain from {lst_returns[0]} to {lst_returns[-1]} is {res_perc}.')
+hist_interest = avg_returns(returns)
+# res_perc = '{:.2%}'.format(hist_interest)
+# print(f'Average gain from {lst_returns[0]} to {lst_returns[-1]} is {res_perc}.')

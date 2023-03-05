@@ -2,9 +2,10 @@ import matplotlib
 matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
 from matplotlib import pylab
+from returns import *
 
 principal = 700000
-int_rate = .09
+int_rate = hist_interest
 num_comp = 12
 comp_years = 13
 counter = 0
