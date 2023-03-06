@@ -34,7 +34,6 @@ lst_returns = list(returns)
 def avg_returns(lst):
     total = 0
     for key, value in lst.items(): 
-        print(key, value)
         total += lst[key]
     return round(total / len(lst), 4)
 

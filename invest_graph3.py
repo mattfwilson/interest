@@ -1,3 +1,6 @@
+##### TO-DOS #####
+# Add in birthdate to calculate time to required retirement withdrawal
+
 import matplotlib
 matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
@@ -8,31 +11,33 @@ int_rate = 0
 num_comp = 12
 comp_years = 15
 counter = 0
-contribution = 75000
+contribution = 0
 left_label = []
 bottom_label = []
-total = []
+total_accrued = []
 int_accrued = []
 
 # compounding func appending each year to total list
-def calc_compound(principal, rate, num_comp, time):
+def calc_compound(principal, rate, num_comp, time, contribution):
     for year in range(time):
+        principal += contribution
         amount = principal * (pow((1 + rate / num_comp), num_comp * (year + 1)))
-        total.append(amount)
+        total_accrued.append(amount)
         print(f'Year {year + 1} - ${round(amount, 2)}')
     return amount
 
 def calc_interest(principal, rate, time):
     for year in range(time):
-        amount = principal * pow(1 + rate), time
-        total.append(amount)
-        print(f'Year {year + 1} - ${round(amount, 2)}')
-    return amount
+        interest = principal * (pow(1 + rate), time)
+        int_accrued.append(interest)
+        print(f'Year {year + 1} - ${round(interest, 2)}')
+    return interest
 
 # input
-principal = int(input('How much do you currently have saved? '))
-comp_years = int(input('How many years until retirement? '))
-int_input = input('What is the current interest rate? ')
+principal = int(input('How much principal do you currently have saved? '))
+comp_years = int(input('How many more years do you plan to work? '))
+int_input = input('What is the current interest rate? (decimal) ')
+contribution = int(input('How much will you contribute per year? '))
 if int_input == '':
     int_rate = float(hist_interest)
 else:
@@ -45,7 +50,9 @@ while counter < comp_years:
     bottom_label.append(counter)
 
 # instantiate calc_compound
-compounded = round(calc_compound(principal, int_rate, num_comp, comp_years), 2)
+compounded = round(calc_compound(principal, int_rate, num_comp, comp_years, contribution), 2)
+# interest_acc = round(calc_interest(principal, int_rate, comp_years), 2)
+# print(interest_acc)
 percentage = '{:.2%}'.format(int_rate)
 dollars = '{:,}'.format(compounded)
 
@@ -54,7 +61,7 @@ fig, ax = plt.subplots(figsize=(12, 9))
 fig.suptitle(f'Compound principal + accrued interest over {comp_years} years', fontsize='20', fontweight='bold')
 plt.title(f'Interest Rate: {percentage}, Total: ${dollars}', fontsize='12', fontweight='regular')
 
-plt.bar(left_label, total, tick_label=bottom_label, width=.5, color=['green'])
+plt.bar(left_label, total_accrued, tick_label=bottom_label, width=.5, color=['green'])
 plt.ylabel('Total value', fontweight='bold')
 ax.xaxis.set_label_coords(.5, -.07)
 plt.xlabel('Years of compounding', fontweight='bold')
