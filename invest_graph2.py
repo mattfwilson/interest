@@ -2,13 +2,13 @@ import matplotlib.pyplot as plt
 from matplotlib import pylab
 
 # variables
-principal = 650000
-interest = .08
+principal = 50000
+interest = .075
 percentage = "{:.2%}".format(interest)
 numCompounds = 1
 yearCounter = 0
-growthYears = 15
-contribution = 40000
+growthYears = 40
+contribution = 70000
 contribution_inc = .02
 testInterest = []
 left_label = []
