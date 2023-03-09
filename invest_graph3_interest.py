@@ -3,12 +3,12 @@ int_rate = .075
 comp_years = 20
 int_accrued = []
 
-def calc_interest(P, r, t):
-    A = 0
-    for year in range(t):
-        A = P * r * t
-        int_accrued.append(A)
-    return A
+def calc_interest(principal, rate, time):
+    amount = 0
+    for year in range(time):
+        amount = principal * rate * time
+        int_accrued.append(amount)
+    return amount
 
 calc_interest(principal, int_rate, comp_years)
 

@@ -6,6 +6,7 @@
 import matplotlib
 matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
+from matplotlib.ticker import MaxNLocator
 from returns import *
 
 principal = 0
@@ -14,10 +15,19 @@ num_comp = 12
 comp_years = 0
 counter = 0
 contribution = 0
-left_label = []
-bottom_label = []
+x_labels = []
+y_labels = []
 total_accrued = []
 int_accrued = []
+
+# determine custom distributed tick values
+labels = list('abcdefghijklmnopqrstuvwxyz')
+
+def format_fn(tick_val, tick_pos):
+    if int(tick_val) in x_labels:
+        return labels[int(tick_val)]
+    else:
+        return ''
 
 # compounding func appending each year to total list
 def calc_compound(principal, rate, num_comp, time, contribution):
@@ -48,8 +58,8 @@ else:
 # count increment for graph tick labels
 while counter < comp_years:
     counter += 1
-    left_label.append(counter)
-    bottom_label.append(counter)
+    y_labels.append(counter)
+    x_labels.append(counter)
 
 # instantiate calc_compound
 compounded = round(calc_compound(principal, int_rate, num_comp, comp_years, contribution), 2)
@@ -63,7 +73,7 @@ fig, ax = plt.subplots(figsize=(12, 9))
 fig.suptitle(f'Compound principal + accrued interest over {comp_years} years', fontsize='20', fontweight='bold')
 plt.title(f'Interest Rate: {percentage}, Total: ${dollars}', fontsize='12', fontweight='regular')
 
-plt.bar(left_label, total_accrued, tick_label=bottom_label, width=.5, color=['green'])
+plt.bar(x_labels, total_accrued, tick_label=y_labels, width=.5, color=['green'])
 plt.ylabel('Total value', fontweight='bold')
 ax.xaxis.set_label_coords(.5, -.07)
 plt.xlabel('Years of compounding', fontweight='bold')
