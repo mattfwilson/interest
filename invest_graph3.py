@@ -15,19 +15,11 @@ num_comp = 12
 comp_years = 0
 counter = 0
 contribution = 0
+withdrawal = 0
 x_labels = []
 y_labels = []
 total_accrued = []
 int_accrued = []
-
-# determine custom distributed tick values
-labels = list('abcdefghijklmnopqrstuvwxyz')
-
-def format_fn(tick_val, tick_pos):
-    if int(tick_val) in x_labels:
-        return labels[int(tick_val)]
-    else:
-        return ''
 
 # compounding func appending each year to total list
 def calc_compound(principal, rate, num_comp, time, contribution):
