@@ -1,5 +1,5 @@
-buy_price = 50000
-sell_price = 78371.59
+buy_price = 40000
+sell_price = 24000
 
 def gain_or_loss(buy, sell):
     res = (sell - buy) / buy

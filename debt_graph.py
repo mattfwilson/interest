@@ -2,6 +2,7 @@
 # Add in birthdate to calculate time to required retirement withdrawal
 # Add function that calculates interest only
 # Create stacked bar graphs showing individual principal vs interest growth
+# Create function to calculate a withdrawal amount until principal hits zero
 
 import matplotlib
 matplotlib.use('TkAgg', force=True)
@@ -15,35 +16,36 @@ num_comp = 12
 comp_years = 0
 counter = 0
 contribution = 0
-withdrawal = 50000
+withdrawal = 75000
 x_labels = []
 y_labels = []
 total_accrued = []
 int_accrued = []
 
 # compounding func appending each year to total list
-def calc_compound(principal, rate, num_comp, time, contribution, year):
-    principal += contribution
-    amount = principal * (pow((1 + rate / num_comp), num_comp * (year + 1)))
-    total_accrued.append(amount)
-    print(f'Year {year + 1} - ${round(amount, 2)}')
-    return amount
-
-def calc_withdraw(principal, rate, num_comp, time, contribution, year):
-    principal += contribution
-    amount = principal * (pow((1 + rate / num_comp), num_comp * (year + 1)))
-    total_accrued.append(amount)
-    print(f'Year {year + 1} - ${round(amount, 2)}')
-    return amount
-
-def calc_interest(principal, rate, time):
+def calc_compound(principal, rate, num_comp, time, contribution, counter):
     for year in range(time):
-        interest = principal * (pow(1 + rate), time)
-        int_accrued.append(interest)
-        print(f'Year {year + 1} - ${round(interest, 2)}')
-    return interest
+        principal += contribution
+        amount = principal * (pow((1 + rate / num_comp), num_comp * (year + 1)))
+        print(f'Year {year + 1} - ${round(amount, 2)}')
+        counter += 1
+        total_accrued.append(amount)
+        y_labels.append(counter)
+        x_labels.append(counter)
+    return amount
 
-# input
+def calc_withdraw(principal, rate, num_comp, withdraw, counter):
+    while principal >= withdraw:
+            counter += 1
+            principal -= withdraw
+            amount = principal * (pow((1 + rate / num_comp), num_comp * (counter + 1)))
+            total_accrued.append(amount)
+            print(f'Year {counter + 1} - ${round(amount, 2)}')
+    principal -= principal
+    counter += 1
+    return principal
+
+# inputs
 principal = int(input('How much principal do you currently have saved? '))
 comp_years = int(input('How many more years do you plan to work? '))
 int_input = input('What is the current interest rate? (decimal) ')
@@ -54,19 +56,16 @@ else:
     int_rate = float(int_input)
 
 # count increment for graph tick labels
-while counter < comp_years:
-    counter += 1
-    y_labels.append(counter)
-    x_labels.append(counter)
-    compounded = round(calc_compound(principal, int_rate, num_comp, comp_years, contribution, counter, withdrawal), 2)
+invest_years = round(calc_compound(principal, int_rate, num_comp, comp_years, contribution, counter), 2)
+retire_years = round(calc_withdraw(principal, int_rate, num_comp, withdrawal, counter), 2)
 
-while principal >= withdrawal:
-    compounded = round(calc_withdraw(principal, int_rate, num_comp, comp_years, contribution, counter, withdrawal), 2)
-    
-# interest_acc = round(calc_interest(principal, int_rate, comp_years), 2)
-# print(interest_acc)
+print(f'Investment years: {invest_years}')
+print(f'Retirement years: {retire_years}')
+print(len(f'X labels: {x_labels}'))
+print(len(f'Y labels: {y_labels}'))
+
 percentage = '{:.2%}'.format(int_rate)
-dollars = '{:,}'.format(compounded)
+dollars = '{:,}'.format(invest_years)
 
 # graph data with matplot
 fig, ax = plt.subplots(figsize=(12, 9))
