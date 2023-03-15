@@ -42,28 +42,11 @@ def calc_retirement(principal, rate, num_comp, withdraw, counter):
             principal -= principal
     return principal, counter
 
-# inputs
-# principal = int(input('How much principal do you currently have saved? '))
-# comp_years = int(input('How many more years do you plan to work? '))
-# int_input = input('What is the current interest rate? (decimal) ')
-# contribution = int(input('How much will you contribute per year? '))
-# if int_input == '':
-#     int_rate = float(hist_interest)
-# else:
-#     int_rate = float(int_input)
-
 # count increment for graph tick labels
 print(f'Counter before: {counter}')
 principal, counter = calc_investing(principal, int_rate, num_comp, comp_years, contribution, counter)
 retire_years, counter = calc_retirement(principal, int_rate, num_comp, withdrawal, counter)
 print(f'Counter after: {counter}')
-
-print(len(f'X labels: {x_labels}'))
-print(len(f'Y labels: {y_labels}'))
-
-y_labels.append(counter)
-x_labels.append(counter)
-
 print(f'Investment years: {principal}')
 print(f'Retirement years: {retire_years}')
 print(len(f'X labels: {x_labels}'))
@@ -80,7 +63,8 @@ plt.title(f'Interest Rate: {percentage}, Total: ${dollars}', fontsize='12', font
 
 print(len(f'Length total accrued: {year_total}'))
 
-plt.bar(range(counter), year_total, tick_label=range(counter), width=.5, color=['green'])
+colors = ['yellowgreen' if i < max(year_total) else 'olivedrab' for i in year_total]
+plt.bar(range(counter), year_total, tick_label=range(counter), width=.5, color=colors)
 plt.ylabel('Total value', fontweight='bold')
 ax.xaxis.set_label_coords(.5, -.07)
 plt.xlabel('Years of compounding', fontweight='bold')
