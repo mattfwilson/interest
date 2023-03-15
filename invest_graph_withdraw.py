@@ -10,12 +10,12 @@ from matplotlib import pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from returns import *
 
-principal = 675000
+principal = 650000
 int_rate = .075
 num_comp = 12
 comp_years = 15
 counter = 0
-contribution = 15000
+contribution = 22500
 withdrawal = 75000
 x_labels = []
 y_labels = []
@@ -43,10 +43,9 @@ def calc_retirement(principal, rate, num_comp, withdraw, counter):
     return principal, counter
 
 # count increment for graph tick labels
-print(f'Counter before: {counter}')
 principal, counter = calc_investing(principal, int_rate, num_comp, comp_years, contribution, counter)
 retire_years, counter = calc_retirement(principal, int_rate, num_comp, withdrawal, counter)
-print(f'Counter after: {counter}')
+
 print(f'Investment years: {principal}')
 print(f'Retirement years: {retire_years}')
 print(len(f'X labels: {x_labels}'))
@@ -54,20 +53,19 @@ print(len(f'Y labels: {y_labels}'))
 print(f'Total Accrued: {year_total}')
 
 percentage = '{:.2%}'.format(int_rate)
-dollars = '{:,}'.format(principal)
+round_dollars = round(principal, 2)
+comma_dollars = '{:,}'.format(round_dollars)
 
 # graph data with matplot
-fig, ax = plt.subplots(figsize=(12, 9))
+fig, ax = plt.subplots(figsize=(14, 9))
 fig.suptitle(f'Compound principal + accrued interest over {comp_years} years', fontsize='20', fontweight='bold')
-plt.title(f'Interest Rate: {percentage}, Total: ${dollars}', fontsize='12', fontweight='regular')
-
-print(len(f'Length total accrued: {year_total}'))
+plt.title(f'Interest Rate: {percentage} -- Retirement year total: ${comma_dollars}', fontsize='12', fontweight='regular')
 
 colors = ['yellowgreen' if i < max(year_total) else 'olivedrab' for i in year_total]
 plt.bar(range(counter), year_total, tick_label=range(counter), width=.5, color=colors)
-plt.ylabel('Total value', fontweight='bold')
+plt.ylabel('Total value (millions)', fontweight='bold')
 ax.xaxis.set_label_coords(.5, -.07)
-plt.xlabel('Years of compounding', fontweight='bold')
+plt.xlabel('Years of compounding/withdrawing', fontweight='bold')
 ax.yaxis.set_label_coords(-.1, .5)
 
 plt.show()
