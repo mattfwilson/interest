@@ -13,35 +13,33 @@ from returns import *
 principal = 675000
 int_rate = .075
 num_comp = 12
-comp_years = 20
+comp_years = 15
 counter = 0
-contribution = 22500
+contribution = 15000
 withdrawal = 75000
 x_labels = []
 y_labels = []
-total_accrued = []
+year_total = []
 
 # compounding func appending each year to total list
 def calc_investing(principal, rate, num_comp, time, contribution, counter):
     for year in range(time):
         principal += contribution
         amount = principal * (pow((1 + rate / num_comp), num_comp * (year + 1)))
+        year_total.append(amount)
         print(f'Year {year + 1} - ${round(amount, 2)}')
         counter += 1
-        total_accrued.append(amount)
     return amount, counter
 
 def calc_retirement(principal, rate, num_comp, withdraw, counter):
     while principal > 0:
         if principal > withdraw:
-            counter += 1
             principal -= withdraw
-            amount = principal * (pow((1 + rate / num_comp), num_comp * (counter + 1)))
-            total_accrued.append(amount)
-            print(f'Year {counter + 1} - ${round(amount, 2)}')
+            year_total.append(principal)
+            print(f'Year {counter + 1} - ${round(principal, 2)}')
+            counter += 1
         else:
             principal -= principal
-            counter += 1
     return principal, counter
 
 # inputs
@@ -56,7 +54,7 @@ def calc_retirement(principal, rate, num_comp, withdraw, counter):
 
 # count increment for graph tick labels
 print(f'Counter before: {counter}')
-invest_years, counter = calc_investing(principal, int_rate, num_comp, comp_years, contribution, counter)
+principal, counter = calc_investing(principal, int_rate, num_comp, comp_years, contribution, counter)
 retire_years, counter = calc_retirement(principal, int_rate, num_comp, withdrawal, counter)
 print(f'Counter after: {counter}')
 
@@ -66,23 +64,23 @@ print(len(f'Y labels: {y_labels}'))
 y_labels.append(counter)
 x_labels.append(counter)
 
-print(f'Investment years: {invest_years}')
+print(f'Investment years: {principal}')
 print(f'Retirement years: {retire_years}')
 print(len(f'X labels: {x_labels}'))
 print(len(f'Y labels: {y_labels}'))
-print(f'Total Accrued: {total_accrued}')
+print(f'Total Accrued: {year_total}')
 
 percentage = '{:.2%}'.format(int_rate)
-dollars = '{:,}'.format(invest_years)
+dollars = '{:,}'.format(principal)
 
 # graph data with matplot
 fig, ax = plt.subplots(figsize=(12, 9))
 fig.suptitle(f'Compound principal + accrued interest over {comp_years} years', fontsize='20', fontweight='bold')
 plt.title(f'Interest Rate: {percentage}, Total: ${dollars}', fontsize='12', fontweight='regular')
 
-print(len(f'Length total accrued: {total_accrued}'))
+print(len(f'Length total accrued: {year_total}'))
 
-plt.bar(range(counter-1), total_accrued, tick_label=range(counter-1), width=.5, color=['green'])
+plt.bar(range(counter), year_total, tick_label=range(counter), width=.5, color=['green'])
 plt.ylabel('Total value', fontweight='bold')
 ax.xaxis.set_label_coords(.5, -.07)
 plt.xlabel('Years of compounding', fontweight='bold')
