@@ -7,6 +7,7 @@ import matplotlib
 matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
 from matplotlib.ticker import MaxNLocator
+import datetime
 
 principal = 650000
 int_rate = .075
@@ -54,6 +55,14 @@ print(f'Total Accrued: {year_totals}')
 percentage = '{:.2%}'.format(int_rate)
 round_dollars = round(principal, 2)
 comma_dollars = '{:,}'.format(round_dollars)
+
+today = datetime.date.today()  
+current_year = today.year
+for i in year_totals:
+    year_labels.append(current_year)
+    current_year += 1  
+print(year_labels)
+
 
 # graph data with matplot
 fig, ax = plt.subplots(figsize=(14, 9))
