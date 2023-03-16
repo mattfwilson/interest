@@ -57,19 +57,22 @@ percentage = '{:.2%}'.format(int_rate)
 round_dollars = round(principal, 2)
 comma_dollars = '{:,}'.format(round_dollars)
 
+# calculate year labels based on age and find peak year total
 today = datetime.date.today()  
 current_year = today.year
 for i in year_totals:
     year_labels.append(current_year)
     current_year += 1  
-print(year_labels)
-print(len(year_labels))
-print(len(year_totals))
+
+for total in year_totals:
+    if total == max(year_totals):
+        max_index = total
+        year_index = year_totals.index(max_index)
 
 # graph data with matplot
 fig, ax = plt.subplots(figsize=(14, 9))
-fig.suptitle(f'Compound principal + accrued interest over {comp_years} years', fontsize='20', fontweight='bold')
-plt.title(f'Interest: {percentage} -- Retire year peak: ${comma_dollars} -- {age + len(year_totals)} years old when savings runs out', fontsize='12', fontweight='regular')
+fig.suptitle(f'Compound growth over of ${year_totals[0]} over {comp_years} years', fontsize='20', fontweight='bold')
+plt.title(f'Interest: {percentage} -- Year {year_labels[year_index]} peak savings: ${comma_dollars} -- {age + len(year_totals)} years old when savings runs out in {year_labels[-1]}', fontsize='12', fontweight='regular')
 
 colors = ['yellowgreen' if i < max(year_totals) else 'olivedrab' for i in year_totals]
 plt.bar(range(counter), year_totals, tick_label=year_labels, width=.5, color=colors)
