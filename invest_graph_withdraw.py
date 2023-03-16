@@ -2,7 +2,6 @@
 # Add in birthdate to calculate time to required retirement withdrawal
 # Add function that calculates interest only
 # Create stacked bar graphs showing individual principal vs interest growth
-# Create function to calculate a withdrawal amount until principal hits zero
 
 import matplotlib
 matplotlib.use('TkAgg', force=True)
