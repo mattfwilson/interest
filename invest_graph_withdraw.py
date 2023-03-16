@@ -9,13 +9,14 @@ from matplotlib import pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import datetime
 
-principal = 650000
+principal = 675000
 int_rate = .075
 num_comp = 12
-comp_years = 12
+comp_years = 13
 counter = 0
-contribution = 22500
-withdrawal = 75000
+contribution = 30000
+withdrawal = 70000
+age = 36
 x_labels = []
 y_labels = []
 year_totals = []
@@ -62,18 +63,20 @@ for i in year_totals:
     year_labels.append(current_year)
     current_year += 1  
 print(year_labels)
-
+print(len(year_labels))
+print(len(year_totals))
 
 # graph data with matplot
 fig, ax = plt.subplots(figsize=(14, 9))
 fig.suptitle(f'Compound principal + accrued interest over {comp_years} years', fontsize='20', fontweight='bold')
-plt.title(f'Interest Rate: {percentage} -- Retirement year total: ${comma_dollars}', fontsize='12', fontweight='regular')
+plt.title(f'Interest: {percentage} -- Retire year peak: ${comma_dollars} -- {age + len(year_totals)} years old when savings runs out', fontsize='12', fontweight='regular')
 
 colors = ['yellowgreen' if i < max(year_totals) else 'olivedrab' for i in year_totals]
-plt.bar(range(counter), year_totals, tick_label=range(counter), width=.5, color=colors)
+plt.bar(range(counter), year_totals, tick_label=year_labels, width=.5, color=colors)
+plt.xticks(rotation=90)
 plt.ylabel('Total value (millions)', fontweight='bold')
-ax.xaxis.set_label_coords(.5, -.07)
+ax.xaxis.set_label_coords(.5, -.1)
 plt.xlabel('Years of compounding/withdrawing', fontweight='bold')
-ax.yaxis.set_label_coords(-.1, .5)
+ax.yaxis.set_label_coords(-.05, .5)
 
 plt.show()
