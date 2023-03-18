@@ -3,13 +3,14 @@
 # Add function that calculates interest only
 # Create stacked bar graphs showing individual principal vs interest growth
 # Make y ticks more consumable
+# Create formula to show how saving x amount more years equates to y amount more years in retirement
 
 from matplotlib import pyplot as plt
 import datetime
+from returns import *
 
 age = 30
 principal = 20000
-int_principal = principal
 int_rate = .075
 num_comp = 12
 comp_years = 25
@@ -57,7 +58,21 @@ def calc_peak_total(years):
             max_index = years.index(peak_total)
     return max_index
 
-##### Call functions and format results #######################################################################
+##### User input ###############################################################################################
+
+principal = int(input('How much money do you currently have saved? '))
+int_principal = principal
+comp_years = int(input('How many more years do you plan to work? '))
+int_input = input('What is the your presumed interest rate? ')
+if int_input == '':
+    int_rate = float(hist_interest)
+    print(f'Using average return of 10 year S&P 500 of {hist_interest}')
+else:
+    int_rate = float(int_input) *.01
+contribution = int(input('How much money will you contribute/save per year? '))
+withdrawal = int(input('How much do you want your retirement salary to be? '))
+
+##### Call functions and format results #########################################################################
 
 principal, counter = calc_invest(principal, int_rate, num_comp, comp_years, contribution, counter)
 retire_years, counter = calc_retire(principal, int_rate, num_comp, withdrawal, counter)
@@ -65,14 +80,15 @@ max_year = calc_peak_total(year_totals)
 
 percentage = '{:.2%}'.format(int_rate)
 round_dollars = round(principal, 2)
-comma_dollars = '{:,}'.format(round_dollars)
+subtitle_dollars = '{:,}'.format(round_dollars)
+title_dollars = '{:,}'.format(int_principal)
 print(interest)
 
-##### Graph data ##############################################################################################
+##### Graph data ################################################################################################
 
-fig, ax = plt.subplots(figsize=(14, 9))
-fig.suptitle(f'Compound growth over of ${int_principal} over {comp_years} years', fontsize='20', fontweight='bold')
-plt.title(f'Interest: {percentage} -- Year {year_labels[max_year]} peak savings: ${comma_dollars} -- {age + len(year_totals)} years old when savings runs out in {year_labels[-1]}', fontsize='12', fontweight='regular')
+fig, ax = plt.subplots(figsize=(15, 9))
+fig.suptitle(f'Compound growth of ${title_dollars} over {comp_years} years', fontsize='20', fontweight='bold')
+plt.title(f'At {percentage} interest, you will retire in {year_labels[max_year]} with a peak savings of ${subtitle_dollars}. You will be {age + len(year_totals)} when your savings runs out in {year_labels[-1]}', fontsize='11', fontweight='regular', y=1.03)
 
 colors = ['indianred' if year_totals.index(x) > max_year else 'olivedrab' for x in year_totals]
 plt.bar(range(counter), year_totals, tick_label=year_labels, width=.5, color=colors)
