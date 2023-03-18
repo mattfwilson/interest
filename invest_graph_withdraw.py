@@ -10,27 +10,30 @@ import datetime
 age = 30
 principal = 20000
 int_principal = principal
-int_rate = .09
+int_rate = .075
 num_comp = 12
-comp_years = 30
-contribution = 6500
+comp_years = 25
+contribution = 16500
 withdrawal = 70000
 year_totals = []
 year_labels = []
+interest = []
 counter = 0
 
 ##### Compounding + withdrawal + peak total functions #########################################################
 
-def calc_investing(principal, rate, num_comp, time, contribution, year_count):
+def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     for year in range(time):
         principal += contribution
         amount = principal * (pow((1 + rate / num_comp), num_comp * (year + 1)))
+        comp_int = amount - principal
+        interest.append(comp_int)
         year_totals.append(amount)
         print(f'Year {year + 1} - ${round(amount, 2)}')
         year_count += 1
     return amount, year_count
 
-def calc_retirement(principal, rate, num_comp, withdraw, year_count):
+def calc_retire(principal, rate, num_comp, withdraw, year_count):
     while principal > 0:
         if principal > withdraw:
             principal -= withdraw
@@ -56,13 +59,14 @@ def calc_peak_total(years):
 
 ##### Call functions and format results #######################################################################
 
-principal, counter = calc_investing(principal, int_rate, num_comp, comp_years, contribution, counter)
-retire_years, counter = calc_retirement(principal, int_rate, num_comp, withdrawal, counter)
+principal, counter = calc_invest(principal, int_rate, num_comp, comp_years, contribution, counter)
+retire_years, counter = calc_retire(principal, int_rate, num_comp, withdrawal, counter)
 max_year = calc_peak_total(year_totals)
 
 percentage = '{:.2%}'.format(int_rate)
 round_dollars = round(principal, 2)
 comma_dollars = '{:,}'.format(round_dollars)
+print(interest)
 
 ##### Graph data ##############################################################################################
 
