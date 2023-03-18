@@ -7,14 +7,14 @@
 from matplotlib import pyplot as plt
 import datetime
 
-age = 36
-principal = 625000
+age = 30
+principal = 20000
 int_principal = principal
-int_rate = .075
+int_rate = .09
 num_comp = 12
-comp_years = 13
-contribution = 40000
-withdrawal = 75000
+comp_years = 30
+contribution = 6500
+withdrawal = 70000
 year_totals = []
 year_labels = []
 counter = 0
