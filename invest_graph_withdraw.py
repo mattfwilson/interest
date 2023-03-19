@@ -9,13 +9,13 @@ from matplotlib import pyplot as plt
 import datetime
 from returns import *
 
-age = 30
-principal = 20000
+age = 36
+principal = 650000
 int_rate = .075
 num_comp = 12
-comp_years = 25
-contribution = 16500
-withdrawal = 70000
+comp_years = 12
+contribution = 40000
+withdrawal = 58253 # Massachusetts average
 year_totals = []
 year_labels = []
 interest = []
@@ -27,8 +27,6 @@ def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     for year in range(time):
         principal += contribution
         amount = principal * (pow((1 + rate / num_comp), num_comp * (year + 1)))
-        comp_int = amount - principal
-        interest.append(comp_int)
         year_totals.append(amount)
         print(f'Year {year + 1} - ${round(amount, 2)}')
         year_count += 1
@@ -36,12 +34,11 @@ def calc_invest(principal, rate, num_comp, time, contribution, year_count):
 
 def calc_retire(principal, rate, num_comp, withdraw, year_count):
     while principal > 0:
-        if principal > withdraw:
-            principal -= withdraw
-            year_totals.append(principal)
-            print(f'Year {year_count + 1} - ${round(principal, 2)}')
-            year_count += 1
-        else:
+        principal -= withdraw
+        year_totals.append(principal)
+        print(f'Year {year_count + 1} - ${round(principal, 2)}')
+        year_count += 1
+        if principal < withdraw:
             principal -= principal
     return principal, year_count
 
@@ -49,7 +46,7 @@ def calc_peak_total(years):
     today = datetime.date.today()  
     current_year = today.year
 
-    for i in year_totals:
+    for year in year_totals:
         year_labels.append(current_year)
         current_year += 1  
     for total in years:
@@ -60,17 +57,17 @@ def calc_peak_total(years):
 
 ##### User input ###############################################################################################
 
-principal = int(input('How much money do you currently have saved? '))
+# principal = int(input('How much money do you currently have saved? '))
 int_principal = principal
-comp_years = int(input('How many more years do you plan to work? '))
-int_input = input('What is the your presumed interest rate? ')
-if int_input == '':
-    int_rate = float(hist_interest)
-    print(f'Using average return of 10 year S&P 500 of {hist_interest}')
-else:
-    int_rate = float(int_input) *.01
-contribution = int(input('How much money will you contribute/save per year? '))
-withdrawal = int(input('How much do you want your retirement salary to be? '))
+# comp_years = int(input('How many more years do you plan to work? '))
+# int_input = input('What is the your presumed interest rate? ')
+# if int_input == '':
+#     int_rate = float(hist_interest)
+#     print(f'Using average return of 10 year S&P 500 of {hist_interest}')
+# else:
+#     int_rate = float(int_input) *.01
+# contribution = int(input('How much money will you contribute/save per year? '))
+# withdrawal = int(input('How much do you want your retirement salary to be? '))
 
 ##### Call functions and format results #########################################################################
 
