@@ -26,20 +26,20 @@ counter = 0
 def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     for year in range(time):
         principal += contribution
-        amount = principal * (pow((1 + rate / num_comp), num_comp * (year + 1)))
+        amount = principal * pow((1 + rate / num_comp), num_comp * (year + 1))
         year_totals.append(amount)
-        print(f'Year {year + 1} - ${round(amount, 2)}')
         year_count += 1
     return amount, year_count
 
 def calc_retire(principal, rate, num_comp, withdraw, year_count):
     while principal > 0:
-        principal -= withdraw
-        year_totals.append(principal)
-        print(f'Year {year_count + 1} - ${round(principal, 2)}')
-        year_count += 1
         if principal < withdraw:
             principal -= principal
+        else:
+            principal -= withdraw
+            # amount = principal * pow((1 + rate / num_comp), (num_comp * (year_count + 1)))
+            year_totals.append(principal)
+            year_count += 1
     return principal, year_count
 
 def calc_peak_total(years):
@@ -74,12 +74,12 @@ int_principal = principal
 principal, counter = calc_invest(principal, int_rate, num_comp, comp_years, contribution, counter)
 retire_years, counter = calc_retire(principal, int_rate, num_comp, withdrawal, counter)
 max_year = calc_peak_total(year_totals)
-
+for year in year_labels:
+    print(f'Year {year}: {year_totals}')
 percentage = '{:.2%}'.format(int_rate)
 round_dollars = round(principal, 2)
 subtitle_dollars = '{:,}'.format(round_dollars)
 title_dollars = '{:,}'.format(int_principal)
-print(interest)
 
 ##### Graph data ################################################################################################
 
