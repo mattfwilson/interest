@@ -4,9 +4,7 @@
 # Create stacked bar graphs showing individual principal vs interest growth
 
 import matplotlib
-matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
-from matplotlib.ticker import MaxNLocator
 from returns import *
 
 principal = 0
