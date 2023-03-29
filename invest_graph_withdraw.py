@@ -10,11 +10,11 @@ import datetime
 from returns import *
 
 age = 36
-principal = 650000
+principal = 675000
 int_rate = .08
 num_comp = 12
 comp_years = 12
-contribution = 35000
+contribution = 40000
 withdrawal = 70000 # 75254 National average of retirement income at 65 years old
 year_totals = []
 year_labels = []
@@ -83,7 +83,7 @@ ret_year = age + year_totals.index(max(year_totals))
 ##### Graph data ################################################################################################
 
 fig, ax = plt.subplots(figsize=(15, 9))
-fig.suptitle(f'Compound growth of ${title_dollars} over {comp_years} years', fontsize='20', fontweight='bold')
+fig.suptitle(f'Compound growth of ${title_dollars} over {comp_years} years', fontsize='24', fontweight='bold')
 plt.title(f'At a {percentage} interest rate, you will retire at age {ret_year} in {year_labels[max_year]} with a peak savings of ${subtitle_dollars}. You will be {age + len(year_totals)} when your savings runs out in {year_labels[-1]}', fontsize='11', fontweight='regular', y=1.03)
 
 colors = ['indianred' if year_totals.index(x) > max_year else 'olivedrab' for x in year_totals]
