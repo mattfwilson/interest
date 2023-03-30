@@ -10,7 +10,7 @@ import datetime
 from returns import *
 
 age = 36
-principal = 675000
+principal = 650000
 int_rate = .08
 num_comp = 12
 comp_years = 12
