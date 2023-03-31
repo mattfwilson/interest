@@ -9,13 +9,13 @@ from matplotlib import pyplot as plt
 import datetime
 from returns import *
 
-age = 36
-principal = 650000
-int_rate = .08
+age = 37
+principal = 20000
+int_rate = .075
 num_comp = 12
-comp_years = 12
-contribution = 40000
-withdrawal = 70000 # 75254 National average of retirement income at 65 years old
+comp_years = 25
+contribution = 18500
+withdrawal = 75000 # 75254 National average of retirement income at 65 years old
 year_totals = []
 year_labels = []
 interest = []
@@ -26,7 +26,7 @@ counter = 0
 def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     for year in range(time):
         principal += contribution
-        amount = principal * pow((1 + rate / num_comp), num_comp * (year + 1))
+        amount = principal * (pow((1 + (rate / num_comp)), num_comp * (year + 1)))
         year_totals.append(amount)
         year_count += 1
     return amount, year_count
