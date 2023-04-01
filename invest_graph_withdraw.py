@@ -26,7 +26,8 @@ counter = 0
 def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     for year in range(time):
         principal += contribution
-        amount = principal * (pow((1 + (rate / num_comp)), num_comp * (year + 1)))
+        amount = principal * pow(((1 + rate / num_comp)), (num_comp * (year)))
+        interest.append(amount - principal)
         year_totals.append(amount)
         year_count += 1
     return amount, year_count
@@ -79,6 +80,8 @@ round_dollars = round(principal, 2)
 subtitle_dollars = '{:,}'.format(round_dollars)
 title_dollars = '{:,}'.format(int_principal)
 ret_year = age + year_totals.index(max(year_totals))
+for i in interest:
+    print(i)
 
 ##### Graph data ################################################################################################
 
