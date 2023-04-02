@@ -88,7 +88,8 @@ for i in interest:
 fig, ax = plt.subplots(figsize=(15, 9))
 fig.suptitle(f'Compound growth of ${title_dollars} over {comp_years} years', fontsize='24', fontweight='bold')
 plt.title(f'At a {percentage} interest rate, you will retire at age {ret_year} in {year_labels[max_year]} with a peak savings of ${subtitle_dollars}. You will be {age + len(year_totals)} when your savings runs out in {year_labels[-1]}', fontsize='11', fontweight='regular', y=1.03)
-
+ax.set_xlim(0.0, 12.0)
+ax.set_ylabel('Plot 1', color='olivedrab')
 colors = ['indianred' if year_totals.index(x) > max_year else 'olivedrab' for x in year_totals]
 plt.bar(range(counter), year_totals, tick_label=year_labels, width=.5, color=colors)
 plt.xticks(rotation=90)
