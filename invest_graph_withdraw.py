@@ -10,12 +10,12 @@ import datetime
 from returns import *
 
 age = 37
-principal = 20000
+principal = 650000
 int_rate = .075
 num_comp = 12
-comp_years = 25
-contribution = 18500
-withdrawal = 75000 # 75254 National average of retirement income at 65 years old
+comp_years = 15
+contribution = 30000
+withdrawal = 75254 # 75254 is the national average of retirement income at 65 years old
 year_totals = []
 year_labels = []
 interest = []
@@ -44,7 +44,7 @@ def calc_retire(principal, rate, num_comp, withdraw, year_count):
     return principal, year_count
 
 def calc_peak_total(years):
-    today = datetime.date.today()  
+    today = datetime.date.today()
     current_year = today.year
 
     for year in year_totals:
@@ -81,7 +81,7 @@ subtitle_dollars = '{:,}'.format(round_dollars)
 title_dollars = '{:,}'.format(int_principal)
 ret_year = age + year_totals.index(max(year_totals))
 for i in interest:
-    print(i)
+    print(f'${round(i, 2)}')
 
 ##### Graph data ################################################################################################
 
