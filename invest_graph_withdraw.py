@@ -16,7 +16,7 @@ int_rate = .08
 num_comp = 1
 comp_years = 20
 contribution = 18500
-withdrawal = 80000 # 75254 is the national average of retirement income at 65 years old
+withdrawal = 40000 # 75254 is the national average of retirement income at 65 years old
 year_totals = []
 year_labels = []
 interest = []
@@ -43,7 +43,7 @@ def calc_invest(principal, rate, num_comp, time, contribution, year_count):
 
 def calc_retire(principal, rate, num_comp, withdraw, year_count):
     # loop never exits because money is never gone (fix below)
-    while principal > 0:
+    for i in range(100):
         if principal < withdraw:
             principal -= principal
         else:
