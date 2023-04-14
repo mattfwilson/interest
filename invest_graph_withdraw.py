@@ -9,13 +9,13 @@ from matplotlib import pyplot as plt
 import datetime
 from returns import *
 
-age = 37
-principal = 650000
-int_rate = .075
-num_comp = 12
-comp_years = 15
-contribution = 30000
-withdrawal = 75254 # 75254 is the national average of retirement income at 65 years old
+age = 36
+principal = 104000
+int_rate = .08
+num_comp = 1
+comp_years = 20
+contribution = 18500
+withdrawal = 80000 # 75254 is the national average of retirement income at 65 years old
 year_totals = []
 year_labels = []
 interest = []
@@ -24,21 +24,30 @@ counter = 0
 ##### Compounding + withdrawal + peak total functions #########################################################
 
 def calc_invest(principal, rate, num_comp, time, contribution, year_count):
+    amount = principal
+    print(principal)
+    print(rate)
+    print(num_comp)
+    print(time)
+    print(contribution)
+    print(year_count)
     for year in range(time):
-        principal += contribution
-        amount = principal * pow(((1 + rate / num_comp)), (num_comp * (year)))
+        amount = amount * pow(((1 + rate / num_comp)), (num_comp * 1))
+        amount += contribution
+        print(amount)
         interest.append(amount - principal)
         year_totals.append(amount)
         year_count += 1
     return amount, year_count
 
 def calc_retire(principal, rate, num_comp, withdraw, year_count):
-    while principal > 0:
+    # loop never exits because money is never gone
+    for i in range(100):
         if principal < withdraw:
             principal -= principal
         else:
             principal -= withdraw
-            # amount = principal * pow((1 + rate / num_comp), (num_comp * (year_count + 1)))
+            principal = principal * pow((1 + rate / num_comp), (num_comp * 1))
             year_totals.append(principal)
             year_count += 1
     return principal, year_count
