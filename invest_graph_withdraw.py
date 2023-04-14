@@ -5,6 +5,7 @@
 # Make y ticks more consumable
 # Create formula to show how saving x amount more years equates to y amount more years in retirement
 
+
 from matplotlib import pyplot as plt
 import datetime
 from returns import *
@@ -41,8 +42,8 @@ def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     return amount, year_count
 
 def calc_retire(principal, rate, num_comp, withdraw, year_count):
-    # loop never exits because money is never gone
-    for i in range(100):
+    # loop never exits because money is never gone (fix below)
+    while principal > 0:
         if principal < withdraw:
             principal -= principal
         else:
