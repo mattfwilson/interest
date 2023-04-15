@@ -4,18 +4,18 @@
 # Create stacked bar graphs showing individual principal vs interest growth
 # Make y ticks more consumable
 # Create formula to show how saving x amount more years equates to y amount more years in retirement
-
+# Withdrawal loop never exits because money can sometimes never deplete
 
 from matplotlib import pyplot as plt
 import datetime
-# from returns import *
+from returns import *
 
 age = 36
 principal = 104000
 int_rate = .08
 num_comp = 1
 comp_years = 20
-contribution = 18500
+contribution = 8500
 withdrawal = 75254 # 75254 is the national average of retirement income at 65 years old
 year_totals = []
 year_labels = []
@@ -24,7 +24,7 @@ counter = 0
 
 ##### Compounding + withdrawal + peak total functions #########################################################
 
-def calc_compound(principal, rate, num_comp, time, contribution, year_count):
+def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     amount = principal
     for year in range(time):
         amount = amount * pow(((1 + rate / num_comp)), (num_comp * 1))
@@ -35,10 +35,9 @@ def calc_compound(principal, rate, num_comp, time, contribution, year_count):
         year_count += 1
     return amount, year_count
 
-def calc_withdraw(principal, rate, num_comp, withdraw, year_count):
-    # loop never exits because money is never gone (fix below)
+def calc_retire(principal, rate, num_comp, withdraw, year_count):
     while principal > 0:
-        if principal < withdraw:
+        if principal <= withdraw:
             principal -= principal
         else:
             principal -= withdraw
@@ -47,7 +46,7 @@ def calc_withdraw(principal, rate, num_comp, withdraw, year_count):
             year_count += 1
     return principal, year_count
 
-def calc_peak(years):
+def calc_peak_total(years):
     today = datetime.date.today()
     current_year = today.year
     for year in year_totals:
@@ -75,9 +74,9 @@ int_principal = principal
 
 ##### Call functions and format results #########################################################################
 
-principal, counter = calc_compound(principal, int_rate, num_comp, comp_years, contribution, counter)
-retire_years, counter = calc_withdraw(principal, int_rate, num_comp, withdrawal, counter)
-max_year = calc_peak(year_totals)
+principal, counter = calc_invest(principal, int_rate, num_comp, comp_years, contribution, counter)
+retire_years, counter = calc_retire(principal, int_rate, num_comp, withdrawal, counter)
+max_year = calc_peak_total(year_totals)
 percentage = '{:.2%}'.format(int_rate)
 round_dollars = round(principal, 2)
 subtitle_dollars = '{:,}'.format(round_dollars)
