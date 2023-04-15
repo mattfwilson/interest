@@ -11,11 +11,11 @@ import datetime
 from returns import *
 
 age = 36
-principal = 104000
-int_rate = .08
+principal = 50000
+int_rate = .075
 num_comp = 1
-comp_years = 20
-contribution = 8500
+comp_years = 25
+contribution = 12000
 withdrawal = 75254 # 75254 is the national average of retirement income at 65 years old
 year_totals = []
 year_labels = []
@@ -40,8 +40,8 @@ def calc_retire(principal, rate, num_comp, withdraw, year_count):
         if principal <= withdraw:
             principal -= principal
         else:
+            # principal = principal * pow((1 + rate / num_comp), (num_comp * 1))
             principal -= withdraw
-            principal = principal * pow((1 + rate / num_comp), (num_comp * 1))
             year_totals.append(principal)
             year_count += 1
     return principal, year_count
@@ -51,7 +51,7 @@ def calc_peak_total(years):
     current_year = today.year
     for year in year_totals:
         year_labels.append(current_year)
-        current_year += 1  
+        current_year += 1
     for total in years:
         if total == max(years):
             peak_total = total
