@@ -29,7 +29,7 @@ def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     for year in range(time):
         amount = amount * pow(((1 + rate / num_comp)), (num_comp * 1))
         amount += contribution
-        print(amount)
+        print(round(amount, 2))
         interest.append(amount - principal)
         year_totals.append(amount)
         year_count += 1
