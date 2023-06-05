@@ -11,10 +11,10 @@ import datetime
 from returns import *
 
 age = 36
-principal = 50000
+principal = 625000
 int_rate = .075
 num_comp = 1
-comp_years = 25
+comp_years = 15
 contribution = 12000
 withdrawal = 75254 # 75254 is the national average of retirement income at 65 years old
 year_totals = []
@@ -39,7 +39,6 @@ def calc_retire(principal, rate, num_comp, withdraw, year_count):
         if principal <= withdraw:
             principal -= principal
         else:
-            principal = principal * pow(((1 + rate / num_comp)), (num_comp * 1))
             principal -= withdraw
             year_totals.append(principal)
             year_count += 1
@@ -57,20 +56,8 @@ def calc_peak_total(years):
             max_index = years.index(peak_total)
     return max_index
 
-# User input
-# principal = int(input('How much money do you currently have saved? '))
-# comp_years = int(input('How many more years do you plan to work? '))
-# int_input = input('What is the your presumed interest rate? ')
-# if int_input == '':
-#     int_rate = float(hist_interest)
-#     print(f'Using average return of 10 year S&P 500 of {hist_interest}')
-# else:
-#     int_rate = float(int_input) *.01
-# contribution = int(input('How much money will you contribute/save per year? '))
-# withdrawal = int(input('How much do you want your retirement salary to be? '))
-int_principal = principal
-
 # Call functions and format results
+int_principal = principal
 principal, counter = calc_invest(principal, int_rate, num_comp, comp_years, contribution, counter)
 retire_years, counter = calc_retire(principal, int_rate, num_comp, withdrawal, counter)
 max_year = calc_peak_total(year_totals)
@@ -88,7 +75,7 @@ fig.suptitle(f'Compound growth of ${title_dollars} over {comp_years} years', fon
 plt.title(f'At a {percentage} interest rate, you will retire at age {ret_year} in {year_labels[max_year]} with a peak savings of ${subtitle_dollars}. You will be {age + len(year_totals)} when your savings runs out in {year_labels[-1]}', fontsize='11', fontweight='regular', y=1.03)
 ax.set_xlim(0.0, 12.0)
 ax.set_ylabel('Plot 1', color='olivedrab')
-colors = ['indianred' if year_totals.index(year) > max_year else 'olivedrab' for year  in year_totals]
+colors = ['indianred' if year_totals.index(x) > max_year else 'olivedrab' for x in year_totals]
 plt.bar(range(counter), year_totals, tick_label=year_labels, width=.5, color=colors)
 plt.xticks(rotation=90)
 plt.ylabel('Total value (millions)', fontweight='bold')
