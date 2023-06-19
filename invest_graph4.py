@@ -2,7 +2,7 @@
 
 # Add function that calculates interest only
 # Create stacked bar graphs showing individual principal vs interest growth
-# Make y ticks more consumable
+# Make y ticks have more readeable increments
 # Create formula to show how saving x amount more years equates to y amount more years in retirement
 # Withdrawal loop never exits because money can sometimes never deplete
 
