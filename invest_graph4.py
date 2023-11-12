@@ -10,11 +10,11 @@ from matplotlib import pyplot as plt
 import datetime
 from returns import *
 
-age = 36
+age = 37
 principal = 625000
-int_rate = .075
+int_rate = hist_interest
 num_comp = 1
-comp_years = 15
+comp_years = 10
 contribution = 12000
 withdrawal = 75254 # 75254 is the national average of retirement income at 65 years old
 year_totals = []
