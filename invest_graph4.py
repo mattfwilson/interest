@@ -12,7 +12,7 @@ from returns import *
 
 age = 36
 principal = 625000
-int_rate = .075
+int_rate = .06
 num_comp = 1
 comp_years = 15
 contribution = 12000
@@ -28,7 +28,7 @@ def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     for year in range(time):
         amount = amount * pow(((1 + rate / num_comp)), (num_comp * 1))
         amount += contribution
-        print(round(amount, 2))
+        # print(round(amount, 2))
         interest.append(amount - principal)
         year_totals.append(amount)
         year_count += 1
@@ -66,13 +66,14 @@ round_dollars = round(principal, 2)
 subtitle_dollars = '{:,}'.format(round_dollars)
 title_dollars = '{:,}'.format(int_principal)
 ret_year = age + year_totals.index(max(year_totals))
-for i in interest:
-    print(f'${round(i, 2)}')
+# for i in interest:
+#    print(f'${round(i, 2)}')
 
 # Graph data
 fig, ax = plt.subplots(figsize=(15, 9))
 fig.suptitle(f'Compound growth of ${title_dollars} over {comp_years} years', fontsize='24', fontweight='bold')
 plt.title(f'At a {percentage} interest rate, you will retire at age {ret_year} in {year_labels[max_year]} with a peak savings of ${subtitle_dollars}. You will be {age + len(year_totals)} when your savings runs out in {year_labels[-1]}', fontsize='11', fontweight='regular', y=1.03)
+
 ax.set_xlim(0.0, 12.0)
 ax.set_ylabel('Plot 1', color='olivedrab')
 colors = ['indianred' if year_totals.index(x) > max_year else 'olivedrab' for x in year_totals]
@@ -82,4 +83,6 @@ plt.ylabel('Total value (millions)', fontweight='bold')
 ax.xaxis.set_label_coords(.5, -.1)
 plt.xlabel('Years of compounding/withdrawing', fontweight='bold')
 ax.yaxis.set_label_coords(-.05, .5)
+
 plt.show()
+
