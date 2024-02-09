@@ -3,7 +3,7 @@ import yfinance as yf
 import random
 import pyautogui
 
-stock_lst = ['AAPL', 'AMZN', 'MSFT']
+stock_lst = ['AAPL', 'AMZN', 'MSFT', 'NVDA', 'TSLA']
 colors = ['forestgreen', 'red', 'royalblue', 'goldenrod', 'darkorange', 'darkviolet', 'olivedrab', 'dimgray', 'lightblue', 'orange']
 ticker = 'AAPL'
 start_date = '2010-01-01'
@@ -20,7 +20,6 @@ def individualize(stocks):
         colors.remove(selected_color)
         stock_data = yf.download(stock, start=start_date, end=end_date)
         plt.plot(stock_data['Close'], label=stock, color=selected_color)
-
 
 individualize(stock_lst)
 
