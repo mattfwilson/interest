@@ -26,7 +26,7 @@ def clean_date(date):
     clean_date = clean_month + ' ' + clean_day + ', ' + clean_year
     return clean_date
 
-def individualize(stocks):
+def parse_stocks(stocks):
     for stock in stocks:
         selected_color = random.choice(colors)
         colors.remove(selected_color)
@@ -42,6 +42,5 @@ def show_graph():
     full_screen()
     plt.show()
 
-clean_date(start_date)
-individualize(stock_lst)
+parse_stocks(stock_lst)
 show_graph()
