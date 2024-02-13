@@ -4,9 +4,17 @@ import pyautogui
 
 principal = 250000
 int_rate = .07
-withdraw_rate = .04
+withdraw_rate = 40000
 inflation = .02
+interest = 0
+retire_years = 0
 
+def calc_retire(principal, int_rate, withdraw_rate, retire_years):
+    interest = principal * int_rate
+    principal = principal - withdraw_rate
+    total = principal + interest
+    retire_years += 1
+    return total, interest, retire_years
 
 def full_screen():
     pyautogui.hotkey('alt', 'space')
@@ -22,4 +30,8 @@ def show_graph():
     full_screen()
     plt.show()
 
-show_graph()
+while principal > 0:
+    res = calc_retire(principal, int_rate, withdraw_rate, retire_years)
+    print(f'Year {res[2]} - Principal: ${round(res[0], 2)} (Interest: ${round(res[1], 2)})')
+    principal = int(res[0])
+    retire_years = int(res[2])
