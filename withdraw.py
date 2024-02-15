@@ -2,16 +2,16 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 import pyautogui
 
-principal = 250000
-int_rate = .07
+principal = 1300000
+int_rate = .06
 withdraw_rate = 40000
 inflation = .02
 interest = 0
 retire_years = 0
 
 def calc_retire(principal, int_rate, withdraw_rate, retire_years):
-    interest = principal * int_rate
     principal = principal - withdraw_rate
+    interest = principal * int_rate
     total = principal + interest
     retire_years += 1
     return total, interest, retire_years
@@ -32,6 +32,8 @@ def show_graph():
 
 while principal > 0:
     res = calc_retire(principal, int_rate, withdraw_rate, retire_years)
-    print(f'Year {res[2]} - Principal: ${round(res[0], 2)} (Interest: ${round(res[1], 2)})')
+    print(f'Year {res[2]} - Principal: ${round(res[0], 2):,} (Interest: ${round(res[1], 2)})')
     principal = int(res[0])
     retire_years = int(res[2])
+    if retire_years > 75:
+        break
