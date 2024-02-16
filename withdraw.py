@@ -2,38 +2,47 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 import pyautogui
 
-principal = 1300000
+principal = 850000
 int_rate = .06
-withdraw_rate = 40000
+withdraw_rate = 45000
 inflation = .02
 interest = 0
 retire_years = 0
+num_comp = 1
+x_axis = []
+y_axis = []
 
-def calc_retire(principal, int_rate, withdraw_rate, retire_years):
+def calc_retire(principal, int_rate, withdraw_rate, retire_years, num_comp):
+    old_principal = principal
+    principal = principal * pow(((1 + int_rate / num_comp)), (num_comp * 1))
+    interest = principal - old_principal
     principal = principal - withdraw_rate
-    interest = principal * int_rate
-    total = principal + interest
     retire_years += 1
-    return total, interest, retire_years
+    x_axis.append(retire_years)
+    y_axis.append(principal)
+    return principal, retire_years, interest
 
 def full_screen():
     pyautogui.hotkey('alt', 'space')
     pyautogui.hotkey('x')
 
 def show_graph():
-    plt.plot(principal, label=stock, color=selected_color)
-    plt.xlabel('Date', fontweight='bold', fontsize=16)
-    plt.ylabel('Stock Price', fontweight='bold', fontsize=16)
-    plt.title('Withdrawing {}% of ${} growing at {}% with {}% inflation'.format(withdraw_rate, principal, interest, inflation, fontweight='bold', fontsize=24, y=1.04))
+    plt.bar(x_axis, y_axis)
+    plt.xlabel('Retirement Years', fontweight='bold', fontsize=16)
+    plt.ylabel('Net Worth', fontweight='bold', fontsize=16)
+    plt.title(f'Withdrawing ${withdraw_rate:,} annually, growing at {int_rate}% with {inflation}% inflation', fontsize=26, fontweight='bold', y=1.04)
     plt.legend()
 
     full_screen()
     plt.show()
 
-while principal > 0:
-    res = calc_retire(principal, int_rate, withdraw_rate, retire_years)
-    print(f'Year {res[2]} - Principal: ${round(res[0], 2):,} (Interest: ${round(res[1], 2)})')
-    principal = int(res[0])
-    retire_years = int(res[2])
-    if retire_years > 75:
-        break
+if __name__ == '__main__':
+    while principal > 0:
+        res = calc_retire(principal, int_rate, withdraw_rate, retire_years, num_comp)
+        print(f'Year {res[1]} - Principal: ${round(res[0], 2):,} (Interest: ${int(round(res[2], 2)):,})')
+        principal = int(res[0])
+        retire_years = int(res[1])
+        if retire_years > 62:
+            break
+
+show_graph()
