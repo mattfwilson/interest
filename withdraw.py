@@ -39,9 +39,9 @@ def show_graph():
 if __name__ == '__main__':
     while principal > 0:
         res = calc_retire(principal, int_rate, withdraw_rate, retire_years, num_comp)
-        print(f'Year {res[1]} - Principal: ${round(res[0], 2):,} (Interest: ${int(round(res[2], 2)):,})')
-        principal = int(res[0])
-        retire_years = int(res[1])
+        print(f'Year {res[1]} - Principal: ${round(res[0], 2):,} (Interest: ${round(res[2], 2):,}/year - ${round(res[2] / 12, 2)}/month)')
+        principal = res[0]
+        retire_years = res[1]
         if retire_years > 62:
             break
 
