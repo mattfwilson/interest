@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
-import yfinance as yf
 import pyautogui
 
 age = 37
 principal = 750000
 int_rate = .06
 int_accrued = 0
-withdraw_rate = 45000
+withdraw_rate = 30000
 inflation = .02
 num_comp = 1
 years = []
@@ -18,7 +17,7 @@ def full_screen():
 
 def calc_retire(principal, age, int_accrued):
     old_principal = principal
-    new_principal = principal * (1 + int_rate / num_comp) ** (num_comp * 1)
+    new_principal = principal * (pow((1 + int_rate / 100), 52))
     int_accrued = new_principal - old_principal
     new_principal -= withdraw_rate
     age += 1
