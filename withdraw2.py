@@ -12,19 +12,19 @@ num_comp = 1
 years = []
 net_worth = []
 
+def full_screen():
+    pyautogui.hotkey('alt', 'space')
+    pyautogui.hotkey('x')
+
 def calc_retire(principal, age, int_accrued):
     old_principal = principal
     new_principal = principal * (1 + int_rate / num_comp) ** (num_comp * 1)
-    int_accrued =  new_principal - old_principal
-    new_principal = new_principal - withdraw_rate
+    int_accrued = new_principal - old_principal
+    new_principal -= withdraw_rate
     age += 1
     years.append(age)
     net_worth.append(new_principal)
     return new_principal, age, int_accrued
-
-def full_screen():
-    pyautogui.hotkey('alt', 'space')
-    pyautogui.hotkey('x')
 
 def show_graph():
     colors = ['red' if value < 0 else 'green' for value in net_worth]
