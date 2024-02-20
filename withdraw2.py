@@ -5,22 +5,22 @@ import pyautogui
 age = 37
 principal = 750000
 int_rate = .06
+int_accrued = 0
 withdraw_rate = 45000
 inflation = .02
 num_comp = 1
 years = []
 net_worth = []
 
-def calc_retire(principal, int_rate, withdraw_rate, age, num_comp):
+def calc_retire(principal, age, int_accrued):
     old_principal = principal
-    interest = 0
-    principal = principal * pow(((1 + int_rate / num_comp)), (num_comp * 1))
-    interest = principal - old_principal
-    principal = principal - withdraw_rate
+    new_principal = principal * (1 + int_rate / num_comp) ** (num_comp * 1)
+    int_accrued =  new_principal - old_principal
+    new_principal = new_principal - withdraw_rate
     age += 1
     years.append(age)
-    net_worth.append(principal)
-    return principal, age, interest
+    net_worth.append(new_principal)
+    return new_principal, age, int_accrued
 
 def full_screen():
     pyautogui.hotkey('alt', 'space')
@@ -37,13 +37,8 @@ def show_graph():
     full_screen()
     plt.show()
 
-if __name__ == '__main__':
-    while principal > 0:
-        res = calc_retire(principal, int_rate, withdraw_rate, age, num_comp)
-        print(f'Year {res[1]} - Principal: ${round(res[0], 2):,} (Interest: ${round(res[2], 2):,}/year - ${round(res[2] / 12, 2)}/month)')
-        principal = res[0]
-        age = res[1]
-        if age > 99:
-            break
+while age < 100:
+    principal, age, int_accrued = calc_retire(principal, age, int_accrued)
+    print(f'Age: {age} - Principal: {principal}')
 
 show_graph()
