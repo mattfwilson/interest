@@ -8,6 +8,7 @@ int_accrued = 0
 withdraw_rate = 30000
 inflation = .02
 num_comp = 1
+ss_contribution = 2000
 years = []
 net_worth = []
 
@@ -37,7 +38,16 @@ def show_graph():
     plt.show()
 
 while age < 100:
-    principal, age, int_accrued = calc_retire(principal, age, int_accrued)
-    print(f'Age: {age} - Principal: {principal}')
+    if principal < 0:
+        break
+    elif principal > 5000000:
+        break
+    else:
+        if age > 61:
+            principal += ss_contribution
+            principal, age, int_accrued = calc_retire(principal, age, int_accrued)
+        else:
+            principal, age, int_accrued = calc_retire(principal, age, int_accrued)
+        print(f'Age: {age} - Principal: {principal}')
 
 show_graph()
