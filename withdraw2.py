@@ -5,7 +5,7 @@ age = 37
 principal = 750000
 int_rate = .06
 int_accrued = 0
-withdraw_rate = 30000
+withdraw_rate = 40000
 inflation = .02
 num_comp = 1
 ss_contribution = 2000
@@ -17,6 +17,8 @@ def full_screen():
     pyautogui.hotkey('x')
 
 def calc_retire(principal, age, int_accrued):
+    if age > 61:
+        principal += ss_contribution
     old_principal = principal
     new_principal = principal * (pow((1 + int_rate / 100), 52))
     int_accrued = new_principal - old_principal
@@ -43,11 +45,7 @@ while age < 100:
     elif principal > 5000000:
         break
     else:
-        if age > 61:
-            principal += ss_contribution
-            principal, age, int_accrued = calc_retire(principal, age, int_accrued)
-        else:
-            principal, age, int_accrued = calc_retire(principal, age, int_accrued)
+        principal, age, int_accrued = calc_retire(principal, age, int_accrued)
         print(f'Age: {age} - Principal: {principal}')
 
 show_graph()
