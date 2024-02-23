@@ -9,7 +9,7 @@ withdraw_rate = 40000
 inflation = .02
 num_comp = 1
 ss_contribution = 2000
-years = []
+retire_years = []
 net_worth = []
 
 def full_screen():
@@ -24,14 +24,14 @@ def calc_retire(principal, age, int_accrued):
     int_accrued = new_principal - old_principal
     new_principal -= withdraw_rate
     age += 1
-    years.append(age)
+    retire_years.append(age)
     net_worth.append(new_principal)
     return new_principal, age, int_accrued
 
 def show_graph():
     colors = ['red' if value < 0 else 'green' for value in net_worth]
-    plt.bar(years, net_worth, color=colors)
-    plt.xlabel('Retirement Years', fontweight='bold', fontsize=16)
+    plt.bar(retire_years, net_worth, color=colors)
+    plt.xlabel('Retirement retire_years', fontweight='bold', fontsize=16)
     plt.ylabel('Net Worth', fontweight='bold', fontsize=16)
     plt.title(f'Withdrawing ${withdraw_rate:,} annually, growing at {int_rate}% with {inflation}% inflation', fontsize=26, fontweight='bold', y=1.04)
     plt.legend()
@@ -42,7 +42,7 @@ def show_graph():
 while age < 100:
     if principal < 0:
         break
-    elif principal > 5000000:
+    elif principal > 2500000:
         break
     else:
         principal, age, int_accrued = calc_retire(principal, age, int_accrued)
