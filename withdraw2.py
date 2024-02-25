@@ -19,13 +19,16 @@ def full_screen():
 def calc_retire(principal, age, int_accrued):
     if age > 61:
         principal += ss_contribution
+
     old_principal = principal
     new_principal = principal * (pow((1 + int_rate / 100), 52))
     int_accrued = new_principal - old_principal
     new_principal -= withdraw_rate
+
     age += 1
     retire_years.append(age)
     net_worth.append(new_principal)
+
     return new_principal, age, int_accrued
 
 def show_graph():
