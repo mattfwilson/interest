@@ -16,9 +16,9 @@ def full_screen():
     pyautogui.hotkey('alt', 'space')
     pyautogui.hotkey('x')
 
-def calc_retire(principal, age, int_accrued):
+def calc_retire(principal, age, int_accrued, ss):
     if age > 61:
-        principal += ss_contribution
+        principal += ss
 
     old_principal = principal
     new_principal = principal * (pow((1 + int_rate / 100), 52))
@@ -29,7 +29,7 @@ def calc_retire(principal, age, int_accrued):
     retire_years.append(age)
     net_worth.append(new_principal)
 
-    return new_principal, age, int_accrued
+    return new_principal, age, int_accrued, ss
 
 def show_graph():
     colors = ['red' if value < 0 else 'green' for value in net_worth]
@@ -43,12 +43,10 @@ def show_graph():
     plt.show()
 
 while age < 100:
-    if principal < 0:
-        break
-    elif principal > 2500000:
+    if principal > 2500000:
         break
     else:
-        principal, age, int_accrued = calc_retire(principal, age, int_accrued)
+        principal, age, int_accrued, ss_contribution = calc_retire(principal, age, int_accrued, ss_contribution)
         print(f'Age: {age} - Principal: {principal}')
 
 show_graph()
