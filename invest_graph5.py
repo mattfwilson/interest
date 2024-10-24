@@ -10,12 +10,12 @@ from matplotlib import pyplot as plt
 import datetime
 from returns import *
 
-age = 36
-principal = 250000
-int_rate = .075
+age = 38
+principal = 1000000
+int_rate = .07
 num_comp = 1
-comp_years = 25
-contribution = 25000
+comp_years = 15
+contribution = 12000
 withdrawal = 75254 # 75254 is the national average of retirement income at 65 years old
 year_totals = []
 year_labels = []
@@ -25,7 +25,7 @@ counter = 0
 # Compounding + withdrawal + peak total functions
 def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     amount = principal
-    for year in range(time):
+    for i in range(time):
         amount = amount * pow(((1 + rate / num_comp)), (num_comp * 1))
         amount += contribution
         print(round(amount, 2))
@@ -47,7 +47,8 @@ def calc_retire(principal, rate, num_comp, withdraw, year_count):
 def calc_peak_total(years):
     today = datetime.date.today()
     current_year = today.year
-    for year in year_totals:
+    max_index = 0
+    for i in year_totals:
         year_labels.append(current_year)
         current_year += 1
     for total in years:
