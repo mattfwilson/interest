@@ -10,6 +10,7 @@ from matplotlib import pyplot as plt
 import datetime
 from returns import *
 
+
 age = 38
 principal = 1000000
 int_rate = .07
@@ -22,10 +23,10 @@ year_labels = []
 interest = []
 counter = 0
 
-# Compounding + withdrawal + peak total functions
+
 def calc_invest(principal, rate, num_comp, time, contribution, year_count):
     amount = principal
-    for i in range(time):
+    for year in range(time):
         amount = amount * pow(((1 + rate / num_comp)), (num_comp * 1))
         amount += contribution
         print(round(amount, 2))
@@ -34,7 +35,7 @@ def calc_invest(principal, rate, num_comp, time, contribution, year_count):
         year_count += 1
     return amount, year_count
 
-def calc_retire(principal, rate, num_comp, withdraw, year_count):
+def calc_retire(principal, withdraw, year_count):
     while principal > 0:
         if principal <= withdraw:
             principal -= principal
@@ -48,7 +49,7 @@ def calc_peak_total(years):
     today = datetime.date.today()
     current_year = today.year
     max_index = 0
-    for i in year_totals:
+    for year in year_totals:
         year_labels.append(current_year)
         current_year += 1
     for total in years:
@@ -57,10 +58,10 @@ def calc_peak_total(years):
             max_index = years.index(peak_total)
     return max_index
 
-# Call functions and format results
+
 int_principal = principal
 principal, counter = calc_invest(principal, int_rate, num_comp, comp_years, contribution, counter)
-retire_years, counter = calc_retire(principal, int_rate, num_comp, withdrawal, counter)
+retire_years, counter = calc_retire(principal, withdrawal, counter)
 max_year = calc_peak_total(year_totals)
 percentage = '{:.2%}'.format(int_rate)
 round_dollars = round(principal, 2)
@@ -68,7 +69,6 @@ subtitle_dollars = '{:,}'.format(round_dollars)
 title_dollars = '{:,}'.format(int_principal)
 ret_year = age + year_totals.index(max(year_totals))
 
-# Graph data
 fig, ax = plt.subplots(figsize=(15, 9))
 fig.suptitle(f'Compound growth of ${title_dollars} over {comp_years} years', fontsize='24', fontweight='bold')
 plt.title(f'At a {percentage} interest rate, you will retire at age {ret_year} in {year_labels[max_year]} with a peak savings of ${subtitle_dollars}. You will be {age + len(year_totals)} when your savings runs out in {year_labels[-1]}', fontsize='11', fontweight='regular', y=1.03)
