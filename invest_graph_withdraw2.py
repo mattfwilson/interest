@@ -1,11 +1,3 @@
-# Tasks & Bugs
-
-# Add function that calculates interest only
-# Create stacked bar graphs showing individual principal vs interest growth
-# Make y ticks more consumable
-# Create formula to show how saving x amount more years equates to y amount more years in retirement
-# Withdrawal loop never exits because money can sometimes never deplete
-
 from matplotlib import pyplot as plt
 import datetime
 from returns import *
@@ -13,11 +5,11 @@ from returns import *
 
 age = 38
 principal = 1000000
-int_rate = .07
+int_rate = .08
 num_comp = 1
-comp_years = 15
+comp_years = 11
 contribution = 12000
-withdrawal = 55000 # 75254 is the national average of retirement income at 65 years old
+withdrawal = 55000
 year_totals = []
 year_labels = []
 interest = []
