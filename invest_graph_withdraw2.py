@@ -27,15 +27,18 @@ def calc_invest(principal, rate, num_comp, time, contribution, year_count):
         year_count += 1
     return amount, year_count
 
-def calc_retire(principal, withdraw, year_count):
-    while principal > 0:
-        if principal <= withdraw:
-            principal -= principal
+def calc_retire(principal, withdraw, year_count, rate, num_comp):
+    amount = principal
+    while amount > 0:
+        if amount <= withdraw:
+            amount -= amount
         else:
-            principal -= withdraw
-            year_totals.append(principal)
+            amount -= withdraw
+            year_totals.append(amount)
             year_count += 1
-    return principal, year_count
+        amount = amount * pow(((1 + rate / num_comp)), (num_comp * 1))
+        year_totals.append(amount)
+    return amount, year_count
 
 def calc_peak_total(years):
     today = datetime.date.today()
@@ -53,7 +56,7 @@ def calc_peak_total(years):
 
 int_principal = principal
 principal, counter = calc_invest(principal, int_rate, num_comp, comp_years, contribution, counter)
-retire_years, counter = calc_retire(principal, withdrawal, counter)
+retire_years, counter = calc_retire(principal, withdrawal, counter, int_rate, num_comp)
 max_year = calc_peak_total(year_totals)
 percentage = '{:.2%}'.format(int_rate)
 round_dollars = round(principal, 2)
