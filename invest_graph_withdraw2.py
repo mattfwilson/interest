@@ -4,7 +4,7 @@ from returns import *
 
 
 age = 38
-principal = 1000000
+principal = 100000
 int_rate = .08
 num_comp = 1
 comp_years = 11
@@ -54,6 +54,7 @@ def calc_peak_total(years):
     return max_index
 
 
+
 int_principal = principal
 principal, counter = calc_invest(principal, int_rate, num_comp, comp_years, contribution, counter)
 retire_years, counter = calc_retire(principal, withdrawal, counter, int_rate, num_comp)
@@ -63,6 +64,9 @@ round_dollars = round(principal, 2)
 subtitle_dollars = '{:,}'.format(round_dollars)
 title_dollars = '{:,}'.format(int_principal)
 ret_year = age + year_totals.index(max(year_totals))
+
+print(len(year_totals))
+print(counter)
 
 fig, ax = plt.subplots(figsize=(15, 9))
 fig.suptitle(f'Compound growth of ${title_dollars} over {comp_years} years', fontsize='24', fontweight='bold')
