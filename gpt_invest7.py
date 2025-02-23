@@ -1,11 +1,9 @@
-import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import random
 
 
 def on_key(event):
-    """Close the figure when the Esc key is pressed."""
     if event.key == 'escape':
         plt.close(event.canvas.figure)
 
