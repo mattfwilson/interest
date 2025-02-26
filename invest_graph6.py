@@ -25,16 +25,16 @@ def compound(principal, low_rate, high_rate, years):
 		c_bal_high.append(high_bal)
 		c_years -= 1
 
-	print(f"{low_int_rate:.1%} Rate Final Balance:", convert_dollars(c_bal_low[-1]))
-	print(f"{high_int_rate:.1%} Rate Final Balance:", convert_dollars(c_bal_high[-1]))
+	print(f'{low_int_rate:.1%} Rate Final Balance:', convert_dollars(c_bal_low[-1]))
+	print(f'{high_int_rate:.1%} Rate Final Balance:', convert_dollars(c_bal_high[-1]))
 
 	plt.figure(figsize=(16, 10))
-	plt.plot(years_lst, c_bal_low, label="Low Rate", color="red", linestyle="--", linewidth=2)
-	plt.plot(years_lst, c_bal_high, label="High Rate", color="blue", linestyle="--", linewidth=2)
+	plt.plot(years_lst, c_bal_low, label='Low Rate', color="red", linestyle='--', linewidth=2)
+	plt.plot(years_lst, c_bal_high, label='High Rate', color="blue", linestyle='--', linewidth=2)
 
-	plt.xlabel("Time (Years)")
-	plt.ylabel("Balance ($)")
-	plt.title("Investment Growth Over Time")
+	plt.xlabel('Time (Years)')
+	plt.ylabel('Balance ($)')
+	plt.title('Investment Growth Over Time')
 	plt.legend()
 	plt.grid()
 	plt.show()
