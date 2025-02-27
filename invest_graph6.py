@@ -39,5 +39,8 @@ def compound(principal, low_rate, high_rate, years):
 	plt.grid()
 	plt.show()
 
-compound(principal, low_rate, high_rate, years)
+	return c_bal_low[-1], c_bal_high[-1]
 
+
+res = compound(principal, low_rate, high_rate, years)
+print(res)
