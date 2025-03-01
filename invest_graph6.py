@@ -39,5 +39,5 @@ def compound(principal, low_rate, high_rate, years):
 	return c_bal_low[-1], c_bal_high[-1]
 
 
-res = compound(principal, low_rate, high_rate, years)
-print(f'Low: {convert_dollars(res[0])}\nHigh: {convert_dollars(res[1])}')
+totals = compound(principal, low_rate, high_rate, years)
+print(f'Low: {convert_dollars(totals[0])}\nHigh: {convert_dollars(totals[1])}')
