@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
 principal = 1_150_000
-low_rate = 0.06
-high_rate = 0.10
-years = 10
+low_rate = 0.054
+high_rate = 0.092
+years = 30
 
 def convert_dollars(amount):
 	return f"${amount:,.2f}"
@@ -26,11 +26,11 @@ def compound(principal, low_rate, high_rate, years):
 		c_years -= 1
 
 	plt.figure(figsize=(16, 10))
-	plt.plot(years_lst, c_bal_low, label='Low Rate', color="red", linestyle='--', linewidth=2)
-	plt.plot(years_lst, c_bal_high, label='High Rate', color="blue", linestyle='--', linewidth=2)
+	plt.plot(years_lst, c_bal_low, label='Low Rate {}%'.format(round(low_rate * 100), 3), color="red", linestyle='--', linewidth=2)
+	plt.plot(years_lst, c_bal_high, label='High Rate {}%'.format(round(high_rate * 100), 3), color="green", linestyle='--', linewidth=2)
 
 	plt.xlabel('Time (Years)')
-	plt.ylabel('Balance ($)')
+	plt.ylabel('Balance ($ in millions)')
 	plt.title('Investment Growth Over Time')
 	plt.legend()
 	plt.grid()
