@@ -11,20 +11,20 @@ ss_contribution = 2000
 retire_years = []
 net_worth = []
 
-def calc_retire(principal, age, int_accrued, ss):
+def calc_retire(principal, age, int_accrued, ss, withdraw):
     if age > 61:
         principal += ss
 
     old_principal = principal
     new_principal = principal * (pow((1 + int_rate / 100), 52))
     int_accrued = new_principal - old_principal
-    new_principal -= withdraw_rate
+    new_principal -= withdraw
 
     age += 1
     retire_years.append(age)
     net_worth.append(new_principal)
 
-    return new_principal, age, int_accrued, ss
+    return new_principal, age, int_accrued, ss, withdraw
 
 def show_graph():
     colors = ['red' if value < 0 else 'green' for value in net_worth]
@@ -40,7 +40,7 @@ while age < 100:
     if principal > 2500000:
         break
     else:
-        principal, age, int_accrued, ss_contribution = calc_retire(principal, age, int_accrued, ss_contribution)
+        principal, age, int_accrued, ss_contribution, withdraw_rate = calc_retire(principal, age, int_accrued, ss_contribution, withdraw_rate)
         print(f'Age: {age} - Principal: {principal}')
 
 show_graph()
