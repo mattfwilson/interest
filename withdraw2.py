@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 age = 37
 principal = 1150000
-int_rate = .06
+int_rate = .07
 int_accrued = 0
 withdraw_rate = 50000
 inflation = .02
@@ -16,7 +16,7 @@ def calc_retire(principal, age, int_accrued, ss, withdraw):
         principal += ss
 
     old_principal = principal
-    new_principal = principal * (pow((1 + int_rate / 100), 52))
+    new_principal = principal * (pow((1 + int_rate / 100), 12))
     int_accrued = new_principal - old_principal
     new_principal -= withdraw
 
@@ -32,7 +32,7 @@ def show_graph():
     plt.bar(retire_years, net_worth, color=colors)
     plt.xlabel('Retirement retire_years', fontweight='bold', fontsize=16)
     plt.ylabel('Net Worth', fontweight='bold', fontsize=16)
-    plt.title(f'Withdrawing ${withdraw_rate:,} annually, growing at {int_rate}% with {inflation}% inflation', fontsize=26, fontweight='bold', y=1.04)
+    plt.title(f'Withdrawing ${withdraw_rate}, annually, growing at {int_rate}% with {inflation}% inflation', fontsize=26, fontweight='bold', y=1.04)
     plt.legend()
     plt.show()
 
